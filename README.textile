@@ -13,7 +13,6 @@ The data includes  Sales, Issue, Store/Chain, Wholesaler and Zip+4 data between 
 h3. Data Files
 
 * Data_Description_and_Problem_Statement for_Hearst_Challenge.xls : provides an summary of the problem, the data, and the relationship between the validation data tables.
-file without the predictions (order is presumed important).
 * zip_plus4_data_[1-5].zip (5 files) : unknown? 
 
 h3. Modelling Data
@@ -33,7 +32,7 @@ The validation dataset is a subset of the modelling dataset and is intended to b
 * Hearst_Challenge_Validation_CSV_Files.zip : package containing 3 validation dataset
 ** sales_vd_dataset.csv : 709,265 records of 5 attributes (wholesaler_key, chain_key, store_key, issue_key, title_key).
 ** store_vd_dataset.csv : 2,500 records of 117 attributes (...)
-** template_for_submission.csv : 492,100 records of 4 attributes (store_key, title_key, year_month, sales_total). This is the submission
+** template_for_submission.csv : 492,100 records of 4 attributes (store_key, title_key, year_month, sales_total). This is the submission file without the predictions (order may be important).
 
 Questions
 * Is the validation dataset a true sub-set of the modelling data, if so, surely the monthly sales numbers are provided in the modelling dataset and can be used as a submission - achieving an RMSE of zero.
