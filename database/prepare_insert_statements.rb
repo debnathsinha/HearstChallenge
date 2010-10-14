@@ -55,7 +55,7 @@ def create_file(filename, tablename, validate=true)
     end    
     # special handing for submission file    
     if !validate and row.length != expected_parts
-      line_data << ",null"
+      line_data << "null"
     end
     # add data
     data << "insert into #{tablename} values(#{line_data.join(',')});\n"  
