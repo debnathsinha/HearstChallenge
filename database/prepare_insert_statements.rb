@@ -1,17 +1,15 @@
 # create insert files from the csv files
 
+# updated to write a line as its processed - much slower but
+# can deal with the really large files we have
+
 require 'csv'
 
 DATABASE_NAME = "hearst_challenge"
+BUFFER_SIZE = 5000
 
 def is_a_number?(s)
   s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
-end
-
-def write_string_to_file(string, filename)
-  f = File.open(filename, 'w')
-  f.write(string)
-  f.close
 end
 
 def csv_field_to_database_field(part)
@@ -33,8 +31,21 @@ def csv_field_to_database_field(part)
   return "\'#{part}\'"
 end
 
+def write_line(file, buffer, data)
+  buffer << data
+  if buffer.length >= BUFFER_SIZE
+    string = buffer.join("\n")
+    f.write(string)
+    f.write("\n")
+  end
+  buffer.clear
+end
+
 def create_file(filename, tablename, validate=true)
-  data = "connect #{DATABASE_NAME};\n"
+  output_filename = "#{tablename}_inserts.sql"
+  f = File.open(output_filename, 'w')
+  buffer = []
+  write_line(f, buffer, "connect #{DATABASE_NAME};")
   skipped_first = false
   expected_parts = 0
   CSV.open(filename, 'r') do |row|
@@ -51,32 +62,38 @@ def create_file(filename, tablename, validate=true)
     # build up line data
     line_data = []
     row.each do |part|
-      line_data << csv_field_to_database_field(part.strip)
+      line_data << csv_field_to_database_field(part)
     end    
     # special handing for submission file    
     if !validate and row.length != expected_parts
       line_data << "null"
     end
     # add data
-    data << "insert into #{tablename} values(#{line_data.join(',')});\n"  
+    write_line(f, buffer, "insert into #{tablename} values(#{line_data.join(',')});")
   end  
-  # write file
-  output_filename = "#{tablename}_inserts.sql"
-  write_string_to_file(data, output_filename)
+  f.close
   # done
   puts "Read #{filename} and wrote #{output_filename}"
 end
 
+puts "starting..."
 
 # validation
-# create_file("../data/sales_vd_dataset.csv", "sales_vd")
-# create_file("../data/store_vd_dataset.csv", "store_vd")
+create_file("../data/sales_vd_dataset.csv", "sales_vd")
+create_file("../data/store_vd_dataset.csv", "store_vd")
 create_file("../data/template_for_submission.csv", "template_vd", false)
 
 # model
-# create_file("../data/issue_mo_dataset.csv", "issue_mo")
-# create_file("../data/sales_mo_dataset.csv", "sales_mo")
-# create_file("../data/store_mo_dataset.csv", "store_mo")
-# create_file("../data/wholesaler_mo_dataset.csv", "wholesaler_mo")
+create_file("../data/issue_mo_dataset.csv", "issue_mo")
+create_file("../data/sales_mo_dataset.csv", "sales_mo")
+create_file("../data/store_mo_dataset.csv", "store_mo")
+create_file("../data/wholesaler_mo_dataset.csv", "wholesaler_mo")
 
 # big files...
+create_file("../data/zip_plus4_data_1.csv", "zip_plus4_data1")
+create_file("../data/zip_plus4_data_2.csv", "zip_plus4_data2")
+create_file("../data/zip_plus4_data_3.csv", "zip_plus4_data3")
+create_file("../data/zip_plus4_data_4.csv", "zip_plus4_data4")
+create_file("../data/zip_plus4_data_5.csv", "zip_plus4_data5")
+
+puts "done."
