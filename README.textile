@@ -1,0 +1,23 @@
+h1. Hearst Challenge
+
+This project documents the participation of Jason Brownlee in the "Hearst Analytics Challenge":http://hearstchallenge.com/
+
+h2. Data Provided
+
+This section summarized the data that was provided.
+
+
+h2. Analysis
+
+...
+
+h2.  Licenses
+
+(c) Copyright 2010 Jason Brownlee. Some Rights Reserved.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/au/">
+        <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/2.5/au/88x31.png" />
+</a>
+
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/au/">
+Creative Commons Attribution-Noncommercial-Share Alike 2.5 Australia License</a>.
