@@ -9,7 +9,7 @@ connect hearst_challenge;
 -- validation
 
 create table sales_vd (
-	wholesaler_key int not null primary key, 
+	wholesaler_key int not null, 
 	chain_key int not null, 
 	store_key int not null, 
 	issue_key int not null, 

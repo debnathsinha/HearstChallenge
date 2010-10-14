@@ -1,2 +1,4 @@
 .DS_Store
 data
+database/*.sql
+!database/create_tables.sql
