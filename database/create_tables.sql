@@ -146,11 +146,12 @@ create table template_vd (
 -- model
 
 create table issue_mo (
-	CAN_COV_PRC int not null primary key, 
-	ISS_CD int, 
-	US_COV_PRC DECIMAL(7,2), 
-	ON_SALE_DATE DATE, 
-	OFF_SALE_DATE DATE
+	issue_key int not null primary key,
+	CAN_COV_PRC DECIMAL(7,2),
+	ISS_CD int,
+	US_COV_PRC DECIMAL(7,2),
+	ON_SALE_DATE date,
+	OFF_SALE_DATE date
 	);
 
 create table sales_mo (
