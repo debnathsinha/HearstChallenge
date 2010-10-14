@@ -33,7 +33,7 @@ def csv_field_to_database_field(part)
   return "\'#{part}\'"
 end
 
-def create_file(filename, tablename)
+def create_file(filename, tablename, validate=true)
   data = "connect #{DATABASE_NAME};\n"
   skipped_first = false
   expected_parts = 0
@@ -44,9 +44,8 @@ def create_file(filename, tablename)
       expected_parts = row.length
       next
     end
-
     # validate
-    if row.length != expected_parts
+    if validate and row.length != expected_parts
       raise "got #{row.length} fields and expected #{expected_parts}, perhaps clean this row manually: #{row.join(',')}" 
     end    
     # build up line data
@@ -54,6 +53,11 @@ def create_file(filename, tablename)
     row.each do |part|
       line_data << csv_field_to_database_field(part.strip)
     end    
+    # special handing for submission file    
+    if !validate and row.length != expected_parts
+      line_data << ",null"
+    end
+    # add data
     data << "insert into #{tablename} values(#{line_data.join(',')});\n"  
   end  
   # write file
@@ -67,9 +71,7 @@ end
 # validation
 # create_file("../data/sales_vd_dataset.csv", "sales_vd")
 # create_file("../data/store_vd_dataset.csv", "store_vd")
-
-# TODO num parts don't match
-# create_file("../data/template_for_submission.csv", "template_vd")
+create_file("../data/template_for_submission.csv", "template_vd", false)
 
 # model
 # create_file("../data/issue_mo_dataset.csv", "issue_mo")
