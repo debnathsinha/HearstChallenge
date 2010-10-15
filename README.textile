@@ -52,11 +52,28 @@ There is very little information about the magazines themselves. Most of the inf
 
 We have a large amount of historic data and we are given a data sub-set of stores and sales data from which predictions must be made. It can be assumed that the provided data is a sub-set of the broader dataset, although has been removed. 
 
+h2. Validation Data
+
+This section provides an analysis of the validation data.
+
+492100 records
+2500 stores
+10 titles
+29 months
+16,968.9655 records per month
+2,468.3103 stores per month
+9.7586 titles per month
+
+
 h2. Test Methodology
 
 This section summarizes  test strategies and the adopted testing strategy.
 
-h3. Test Strategies
+h3. Test Data
+
+Historic test data can be prepared from the sales table, joint to the issue table.
+
+
 
 
 h2. Magazine
