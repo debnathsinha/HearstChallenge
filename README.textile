@@ -147,7 +147,7 @@ select count(*) from
 - yes all 405
 
 this assumes a 1-to-1 relationship between issues and titles (an issue only belongs to one title)
-
+- stats for both sales data tables confirm this
 
 Are there any issues from the same months from the larger corpus?
 ?
@@ -161,6 +161,14 @@ I guess cross-validate (n-fold, hold one out) the validation data
 
 TODO derive submission style data from the broader corpus. 
 
+select smo.store_key as store_key,
+	smo.title_key as title_key,
+	year(imo.on_sale_date) as sale_year,
+	month(imo.on_sale_date) as sale_month,
+	sum(smo.sales) as sales_total
+from issue_mo imo, sales_mo smo
+where smo.issue_key = imo.issue_key
+group by smo.store_key, smo.title_key, year(imo.on_sale_date), month(imo.on_sale_date)
 
 
 
