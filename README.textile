@@ -54,27 +54,76 @@ We have a large amount of historic data and we are given a data sub-set of store
 
 h2. Validation Data
 
-h3. Summary Statistics
+h3. Summary Statistics: template_vd
 
-The following provides summary statistics for the validation dataset.
+The following provides summary statistics for the validation dataset (template_vd).
 
-| Measures | Values |
+|_. Measures |_. Values |
 | Total Records | 492100 |
 | Total Stores | 2500 |
 | Total Titles | 10 |
 | Total Months | 29 |
 | Average Records/Month | 16968 |
 | Average Stores/Month | 2468 |
-| Average Stores/Month | 9 |
+| Average Titles/Month | 9 |
+| Average Records/Store | 196 |
+| Average Titles/Store | 7 |
+| Average Records/Title | 49210 |
+| Average Stores/Title | 1950 |
+
+h3. Summary Statistics: sales_vd
+
+The following provides summary statistics for the validation dataset (sales_vd).
+
+|_. Measures |_. Values |
+| Total Records | 709265 |
+| Total Wholesalers | 40 |
+| Total Chains | 85 |
+| Total Stores | 2456 |
+| Total Issues | 405 |
+| Total Titles | 10 |
+| Average Records/Title | 70926 |
+| Average Issues/Title | 40 |
+| Average Stores/Title | 1945 |
+| Average Chains/Title | 66 |
+| Average Wholesalers/Title | 35 |
+| Average Records/Issue | 1751 |
+| Average Wholesalers/Issue | 27 |
+| Average Chains/Issue | 57 |
+| Average Stores/Issue | 1719 |
+| Average Titles/Issue | 1 |
+| Average Records/Store | 288 |
+| Average Wholesalers/Store | 1 |
+| Average Chains/Store | 1 |
+| Average Issues/Store | 283 |
+| Average Titles/Store | 7 |
+| Average Records/Chain | 8344 |
+| Average Wholesalers/Chain | 2 |
+| Average Stores/Chain | 28 |
+| Average Issues/Chain | 272 |
+| Average Titles/Chain | 7 |
+| Average Records/Wholesaler | 17731 |
+| Average Store/Wholesaler | 108 |
+| Average Chains/Wholesaler | 4 |
+| Average Issues/Wholesaler | 275 |
+| Average Titles/Wholesaler | 8 |
+
+Note the lack of sales data.
+
+h3. Summary Statistics: stores_vd
+
+The following provides summary statistics for the validation dataset (stores_vd).
+
+TODO
+
+
 
 
 h2. Test Methodology
 
-This section summarizes  test strategies and the adopted testing strategy.
+I guess cross-validate (n-fold, hold one out) the validation data
 
-h3. Test Data
-
-Historic test data can be prepared from the sales table, joint to the issue table.
+TODO derive submission style data from the broader corpus. 
 
 
 
