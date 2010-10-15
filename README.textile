@@ -2,7 +2,6 @@ h1. Hearst Challenge
 
 This project documents the participation of Jason Brownlee in the "Hearst Analytics Challenge":http://hearstchallenge.com/
 
-The objective of the competition is to predict the monthly sales of magazine sales in each store. Submissions are assessed based on the RMSE of the submission.
 
 h2. Provided Data
 
@@ -13,7 +12,7 @@ The data includes  Sales, Issue, Store/Chain, Wholesaler and Zip+4 data between 
 h3. Data Files
 
 * Data_Description_and_Problem_Statement for_Hearst_Challenge.xls : provides an summary of the problem, the data, and the relationship between the validation data tables.
-* zip_plus4_data_[1-5].zip (5 files) : unknown? 
+* zip_plus4_data_[1-5].zip (5 files) : ?
 
 h3. Modelling Data
 
@@ -41,9 +40,53 @@ h3. Competition Data
 
 A third set of data (the holdout set) will be provided at the end of the competition and will be used to determine the winner of the competition. This third dataset will include data from outside the 2006-2009 time period.
 
-h2. Analysis
+h3. Summary
 
-...
+Submissions are assessed based on the RMSE of the sales in the submission.
+
+The objective is to predict the number of magazine units sold at a given store during a given month. Historic information can be deduced from the sales table, specifically the issue_key, store_key, and sales. The table appears to be missing date information. The date of the sames information could be deduced from the issue on-sale/off-sale dates. 
+
+The problem is to predict monthly store/issue/sales numbers with no past information for specific months, only for issues? This means we don't know how issues behave over time, only holistically.
+
+There is very little information about the magazines themselves. Most of the information is about the stores including the demographics for the store area and the store wholesaler. We have sales information for the store-issue and we have some very basic information about the issue such as its price. We have a magazine title key in the sale data to which to relate issues to each other.
+
+We have a large amount of historic data and we are given a data sub-set of stores and sales data from which predictions must be made. It can be assumed that the provided data is a sub-set of the broader dataset, although has been removed. 
+
+h2. Test Methodology
+
+This section summarizes  test strategies and the adopted testing strategy.
+
+h3. Test Strategies
+
+
+h2. Magazine
+
+An analysis of magazine information
+
+h2. Stores
+
+An analysis of store information
+
+h2. Sales
+
+An analysis of sales information
+
+h2. Demographics
+
+An analysis of demographics information
+
+h2. Issue
+
+An analysis of issue information
+
+h2. Wholesaler
+
+An analysis of wholesaler information
+
+
+
+
+
 
 h2.  Licenses
 
