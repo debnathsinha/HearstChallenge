@@ -54,15 +54,18 @@ We have a large amount of historic data and we are given a data sub-set of store
 
 h2. Validation Data
 
-This section provides an analysis of the validation data.
+h3. Summary Statistics
 
-492100 records
-2500 stores
-10 titles
-29 months
-16,968.9655 records per month
-2,468.3103 stores per month
-9.7586 titles per month
+The following provides summary statistics for the validation dataset.
+
+| Measures | Values |
+| Total Records | 492100 |
+| Total Stores | 2500 |
+| Total Titles | 10 |
+| Total Months | 29 |
+| Average Records/Month | 16968 |
+| Average Stores/Month | 2468 |
+| Average Stores/Month | 9 |
 
 
 h2. Test Methodology
