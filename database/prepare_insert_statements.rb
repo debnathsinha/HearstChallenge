@@ -3,10 +3,11 @@
 # updated to write a line as its processed - much slower but
 # can deal with the really large files we have
 
-require 'csv'
+require 'rubygems'
+require 'fastercsv'
 
 DATABASE_NAME = "hearst_challenge"
-BUFFER_SIZE = 5000
+BUFFER_SIZE = 50000
 
 def is_a_number?(s)
   s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
@@ -35,10 +36,10 @@ def write_line(file, buffer, data)
   buffer << data
   if buffer.length >= BUFFER_SIZE
     string = buffer.join("\n")
-    f.write(string)
-    f.write("\n")
-  end
-  buffer.clear
+    file.write(string)
+    file.write("\n")
+    buffer.clear
+  end  
 end
 
 def create_file(filename, tablename, validate=true)
@@ -48,7 +49,7 @@ def create_file(filename, tablename, validate=true)
   write_line(f, buffer, "connect #{DATABASE_NAME};")
   skipped_first = false
   expected_parts = 0
-  CSV.open(filename, 'r') do |row|
+  FasterCSV.foreach(filename) do |row|
     # skip header line
     if !skipped_first
       skipped_first = true
