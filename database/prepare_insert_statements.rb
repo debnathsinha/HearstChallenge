@@ -32,9 +32,9 @@ def csv_field_to_database_field(part)
   return "\'#{part}\'"
 end
 
-def write_line(file, buffer, data)
-  buffer << data
-  if buffer.length >= BUFFER_SIZE
+def write(file, buffer, data, force=false)
+  buffer << data if !data.nil?
+  if force or buffer.length >= BUFFER_SIZE
     string = buffer.join("\n")
     file.write(string)
     file.write("\n")
@@ -46,7 +46,7 @@ def create_file(filename, tablename, validate=true)
   output_filename = "#{tablename}_inserts.sql"
   f = File.open(output_filename, 'w')
   buffer = []
-  write_line(f, buffer, "connect #{DATABASE_NAME};")
+  write(f, buffer, "connect #{DATABASE_NAME};")
   skipped_first = false
   expected_parts = 0
   FasterCSV.foreach(filename) do |row|
@@ -70,10 +70,11 @@ def create_file(filename, tablename, validate=true)
       line_data << "null"
     end
     # add data
-    write_line(f, buffer, "insert into #{tablename} values(#{line_data.join(',')});")
+    write(f, buffer, "insert into #{tablename} values(#{line_data.join(',')});")
   end  
+  write(f, buffer, nil, true)
   f.close
-  # done
+  # done  
   puts "Read #{filename} and wrote #{output_filename}"
 end
 
