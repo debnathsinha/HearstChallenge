@@ -33,6 +33,10 @@ class SalesVd < ActiveRecord::Base
   set_table_name "sales_vd"
 end
 
+class SalesMo < ActiveRecord::Base
+  set_table_name "sales_mo"
+end
+
 
 def print_template_vd_stats  
   puts "validation data info"
@@ -101,9 +105,56 @@ def print_sales_vd_stats
   puts ""
 end
 
+def print_sales_mo_stats  
+  puts "validation data info"
+  print_heading(["Measures", "Values"])
+  # totals
+  print_size("Total Records", SalesMo.count)
+  print_size("Total Wholesalers", SalesMo.calculate(:count, :wholesaler_key, :distinct=>true))
+  print_size("Total Chains", SalesMo.calculate(:count, :chain_key, :distinct=>true))
+  print_size("Total Stores", SalesMo.calculate(:count, :store_key, :distinct=>true))
+  print_size("Total Issues", SalesMo.calculate(:count, :issue_key, :distinct=>true))
+  print_size("Total Titles", SalesMo.calculate(:count, :title_key, :distinct=>true))
+  
+  # title stats
+  print_size("Average Records/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by title_key) as t"))
+  print_size("Average Issues/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(issue_key)) as c from sales_mo group by title_key) as t"))
+  print_size("Average Stores/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(store_key)) as c from sales_mo group by title_key) as t"))
+  print_size("Average Chains/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(chain_key)) as c from sales_mo group by title_key) as t"))
+  print_size("Average Wholesalers/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(wholesaler_key)) as c from sales_mo group by title_key) as t"))
+  # issue stats
+    print_size("Average Records/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by issue_key) as t"))
+  print_size("Average Wholesalers/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(wholesaler_key)) as c from sales_mo group by issue_key) as t"))
+  print_size("Average Chains/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(chain_key)) as c from sales_mo group by issue_key) as t"))
+  print_size("Average Stores/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(store_key)) as c from sales_mo group by issue_key) as t"))
+  print_size("Average Titles/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(title_key)) as c from sales_mo group by issue_key) as t"))
+  # store stats
+  print_size("Average Records/Store", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by store_key) as t"))
+  print_size("Average Wholesalers/Store", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(wholesaler_key)) as c from sales_mo group by store_key) as t"))
+  print_size("Average Chains/Store", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(chain_key)) as c from sales_mo group by store_key) as t"))
+  print_size("Average Issues/Store", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(issue_key)) as c from sales_mo group by store_key) as t"))
+  print_size("Average Titles/Store", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(title_key)) as c from sales_mo group by store_key) as t"))  
+  # chain stats
+  print_size("Average Records/Chain", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by chain_key) as t"))
+  print_size("Average Wholesalers/Chain", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(wholesaler_key)) as c from sales_mo group by chain_key) as t"))
+  print_size("Average Stores/Chain", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(store_key)) as c from sales_mo group by chain_key) as t"))
+  print_size("Average Issues/Chain", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(issue_key)) as c from sales_mo group by chain_key) as t"))
+  print_size("Average Titles/Chain", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(title_key)) as c from sales_mo group by chain_key) as t"))    
+  # wholesaler stats
+  print_size("Average Records/Wholesaler", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by wholesaler_key) as t"))
+  print_size("Average Store/Wholesaler", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(store_key)) as c from sales_mo group by wholesaler_key) as t"))
+  print_size("Average Chains/Wholesaler", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(chain_key)) as c from sales_mo group by wholesaler_key) as t"))
+  print_size("Average Issues/Wholesaler", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(issue_key)) as c from sales_mo group by wholesaler_key) as t"))
+  print_size("Average Titles/Wholesaler", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(title_key)) as c from sales_mo group by wholesaler_key) as t"))   
+  
+  puts ""
+end
+
 
 if __FILE__ == $0
 #  print_template_vd_stats
-  print_sales_vd_stats  
+#  print_sales_vd_stats  
+  print_sales_mo_stats  
+  
   
 end

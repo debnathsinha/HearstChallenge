@@ -63,6 +63,8 @@ The following provides summary statistics for the validation dataset (template_v
 | Total Stores | 2500 |
 | Total Titles | 10 |
 | Total Months | 29 |
+
+|_. Measures |_. Values |
 | Average Records/Month | 16968 |
 | Average Stores/Month | 2468 |
 | Average Titles/Month | 9 |
@@ -82,33 +84,42 @@ The following provides summary statistics for the validation dataset (sales_vd).
 | Total Stores | 2456 |
 | Total Issues | 405 |
 | Total Titles | 10 |
+
+|_. Measures |_. Values |
 | Average Records/Title | 70926 |
 | Average Issues/Title | 40 |
 | Average Stores/Title | 1945 |
 | Average Chains/Title | 66 |
 | Average Wholesalers/Title | 35 |
+
+|_. Measures |_. Values |
 | Average Records/Issue | 1751 |
 | Average Wholesalers/Issue | 27 |
 | Average Chains/Issue | 57 |
 | Average Stores/Issue | 1719 |
 | Average Titles/Issue | 1 |
+
+|_. Measures |_. Values |
 | Average Records/Store | 288 |
 | Average Wholesalers/Store | 1 |
 | Average Chains/Store | 1 |
 | Average Issues/Store | 283 |
 | Average Titles/Store | 7 |
+
+|_. Measures |_. Values |
 | Average Records/Chain | 8344 |
 | Average Wholesalers/Chain | 2 |
 | Average Stores/Chain | 28 |
 | Average Issues/Chain | 272 |
 | Average Titles/Chain | 7 |
+
+|_. Measures |_. Values |
 | Average Records/Wholesaler | 17731 |
 | Average Store/Wholesaler | 108 |
 | Average Chains/Wholesaler | 4 |
 | Average Issues/Wholesaler | 275 |
 | Average Titles/Wholesaler | 8 |
 
-Note the lack of sales data.
 
 h3. Summary Statistics: stores_vd
 
@@ -117,7 +128,32 @@ The following provides summary statistics for the validation dataset (stores_vd)
 TODO
 
 
+h3. Summary
 
+The required approach for the competition may be collaborative filtering where nearest-neighbour issues/titles are extracted from the historic corpus and used for prediction.
+
+Are any of the titles in the larger corpus?
+select count(*) from 
+	(select distinct(sm.title_key) as sm_title_key from sales_mo sm) as a, 
+	(select distinct(sd.title_key) as sd_title_key from sales_vd sd) as b
+	where a.sm_title_key = b.sd_title_key;
+- yes all 10
+
+Are there any issues in the larger corpus?
+select count(*) from 
+	(select distinct(sm.issue_key) as sm_issue_key from sales_mo sm) as a, 
+	(select distinct(sd.issue_key) as sd_issue_key from sales_vd sd) as b
+	where a.sm_issue_key = b.sd_issue_key;
+- yes all 405
+
+this assumes a 1-to-1 relationship between issues and titles (an issue only belongs to one title)
+
+
+Are there any issues from the same months from the larger corpus?
+?
+
+How can we easily normalize corpus sales/months?
+- a view on sales that includes the month
 
 h2. Test Methodology
 
@@ -138,7 +174,52 @@ An analysis of store information
 
 h2. Sales
 
-An analysis of sales information
+Summary statistics of the sales_mo table
+
+|_. Measures |_. Values |
+| Total Records | 10929954 |
+| Total Wholesalers | 65 |
+| Total Chains | 1013 |
+| Total Stores | 39374 |
+| Total Issues | 427 |
+| Total Titles | 10 |
+
+|_. Measures |_. Values |
+| Average Records/Title | 1092995 |
+| Average Issues/Title | 42 |
+| Average Stores/Title | 30952 |
+| Average Chains/Title | 818 |
+| Average Wholesalers/Title | 60 |
+
+|_. Measures |_. Values |
+| Average Records/Issue | 25597 |
+| Average Wholesalers/Issue | 46 |
+| Average Chains/Issue | 686 |
+| Average Stores/Issue | 25334 |
+| Average Titles/Issue | 1 |
+
+|_. Measures |_. Values |
+| Average Records/Store | 277 |
+| Average Wholesalers/Store | 1 |
+| Average Chains/Store | 1 |
+| Average Issues/Store | 274 |
+| Average Titles/Store | 7 |
+
+|_. Measures |_. Values |
+| Average Records/Chain | 10789 |
+| Average Wholesalers/Chain | 2 |
+| Average Stores/Chain | 38 |
+| Average Issues/Chain | 289 |
+| Average Titles/Chain | 8 |
+
+|_. Measures |_. Values |
+| Average Records/Wholesaler | 168153 |
+| Average Store/Wholesaler | 772 |
+| Average Chains/Wholesaler | 35 |
+| Average Issues/Wholesaler | 307 |
+| Average Titles/Wholesaler | 9 |
+
+
 
 h2. Demographics
 

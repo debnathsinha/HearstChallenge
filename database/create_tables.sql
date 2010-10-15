@@ -16,6 +16,9 @@ create table sales_vd (
 	title_key int not null
 	);
 
+CREATE INDEX title_key_index USING BTREE ON sales_vd (title_key);
+CREATE INDEX issue_key_index USING BTREE ON sales_vd (issue_key);
+
 create table store_vd (
 	chain_key int,
 	store_key int,
@@ -165,7 +168,10 @@ create table sales_mo (
 	sales int,
 	title_key int
 	);
-	
+
+CREATE INDEX title_key_index USING BTREE ON sales_mo (title_key);
+CREATE INDEX issue_key_index USING BTREE ON sales_mo (issue_key);
+
 create table store_mo (
 	chain_key int,
 	store_key int,
