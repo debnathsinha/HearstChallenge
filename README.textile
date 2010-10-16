@@ -150,33 +150,30 @@ this assumes a 1-to-1 relationship between issues and titles (an issue only belo
 - stats for both sales data tables confirm this
 
 Are there any issues from the same months from the larger corpus?
-?
+no
+select vd.* 
+from template_mo mo, template_vd2 vd
+where mo.store_key=vd.store_key 
+and mo.title_key=vd.title_key
+and mo.on_year=vd.on_year
+and mo.on_month=vd.on_month
 
-How can we easily normalize corpus sales/months?
-- a view on sales that includes the month
+what overlap is there?
+- no stores
+- titles yes
+- months yes
+- years yes
+
 
 h2. Test Methodology
 
 I guess cross-validate (n-fold, hold one out) the validation data
 
-TODO derive submission style data from the broader corpus. 
-
-select smo.store_key as store_key,
-	smo.title_key as title_key,
-	year(imo.on_sale_date) as sale_year,
-	month(imo.on_sale_date) as sale_month,
-	sum(smo.sales) as sales_total
-from issue_mo imo, sales_mo smo
-where smo.issue_key = imo.issue_key
-group by smo.store_key, smo.title_key, year(imo.on_sale_date), month(imo.on_sale_date)
 
 
-are there any issues that span more than one month?
-- yes, heaps: 44371
-select * from issue_mo
-where month(on_sale_date) <> month(off_sale_date)
 
-This means that special handling is needed when preparing the sales data
+
+
 
 h2. Magazine
 
@@ -233,7 +230,15 @@ Summary statistics of the sales_mo table
 | Average Issues/Wholesaler | 307 |
 | Average Titles/Wholesaler | 9 |
 
+there is negative sales data, it should be ignored. see "Clarification regarding negative sales values in the sales_mo_dataset table":http://hearstchallenge.com/index.php?option=com_ccboard&view=postlist&forum=20&topic=100&Itemid=&task_id=
 
+are there any issues that span more than one month?
+- yes, heaps: 44371
+select * from issue_mo
+where month(on_sale_date) <> month(off_sale_date)
+
+This means that special handling is needed when preparing the sales data
+No, it means there may be issue interference effects that could be modelled
 
 h2. Demographics
 

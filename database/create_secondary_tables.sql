@@ -1,3 +1,5 @@
+-- additional derived tables and views
+
 connect hearst_challenge;
 
 -- issue_mo_2
@@ -31,3 +33,18 @@ from issue_mo_2 imo, sales_mo smo
 where smo.issue_key = imo.issue_key
 group by smo.store_key, smo.title_key, imo.on_year, imo.on_month;
 
+
+-- template_td2
+create table template_vd2 (
+	store_key int not null, 
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	sales_total int
+);
+
+CREATE INDEX template_td2_key_index USING BTREE ON template_vd2 (store_key, title_key, on_year, on_month);
+
+insert into template_vd2 (store_key, title_key, on_year, on_month, sales_total)
+select store_key, title_key, CONVERT(substring(yearmonth, 1, 4), SIGNED), CONVERT(substring(yearmonth, 5, 2), SIGNED), sales_total
+from template_vd;
