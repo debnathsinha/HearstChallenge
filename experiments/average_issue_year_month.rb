@@ -62,8 +62,6 @@ if __FILE__ == $0
     total += 1
   end
   
-  # puts "No. value for #{missing_count} of #{total} rows"
-  
   # write file
   f = File.open("average_issue_year_month_submission.csv", 'w')
   output_lines.each do |line|
