@@ -1,4 +1,5 @@
 .DS_Store
-data
+data/*.csv
+data/zips
 database/*.sql
 !database/create_tables.sql
