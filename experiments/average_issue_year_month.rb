@@ -19,9 +19,28 @@ class TemplateMo < ActiveRecord::Base
 end
 
 
+def to_key(title, year, month)
+  return "#{title}-#{year}-#{month}"
+end
+
 if __FILE__ == $0
+  # test query
+  # rs = TemplateMo.find_by_sql("select mo.title_key as title_key, mo.on_year as on_year, mo.on_month as on_month, avg(mo.sales_total) as sales_total from template_mo mo, (select title_key, on_year, on_month from template_vd2 group by title_key, on_year, on_month) as vd where mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month and mo.on_year=2008 and mo.on_month=01 and mo.title_key<5 group by title_key, on_year, on_month")
+  # actual query
+  rs = TemplateMo.find_by_sql("select mo.title_key as title_key, mo.on_year as on_year, mo.on_month as on_month, avg(mo.sales_total) as sales_total from template_mo mo, (select title_key, on_year, on_month from template_vd2 group by title_key, on_year, on_month) as vd where mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month group by title_key, on_year, on_month")
+  puts "Result set: #{rs.length}"
+  
+  # build a hash
+  hash = {}
+  rs.each do |row|
+    key = to_key(row["title_key"], row["on_year"], row["on_month"])
+    hash[key] = row["sales_total"]
+  end
+  puts "Hash set: #{hash.length}"
   
   output_lines = []
+  missing_count = 0
+  total = 0
   # build output
   File.open("../data/template_for_submission.csv").each_with_index do |line, i|
     line = line.strip
@@ -32,10 +51,20 @@ if __FILE__ == $0
     store, title, yearmonth = line.split(",")
     year, month = yearmonth[0,4], yearmonth[4,5]
     # get average across all stores for title/year/month
-    avg = TemplateMo.average(:sales_total, :conditions=>['title_key=? and on_year=? and on_month=?',title,year,month])    
+    key = to_key(title, year, month)
+    avg = hash[key]
+    if avg.nil? 
+      missing_count += 1
+      avg = 9.9273
+    end
+    # raise "could not find average for key=(#{key}) line #{(i+1)} = (#{line})" if avg.nil?    
+    # avg = TemplateMo.average(:sales_total, :conditions=>['title_key=? and on_year=? and on_month=?',title,year,month])    
     output_lines << "#{store},#{title},#{yearmonth},#{avg}"
-    puts "#{i}..." if (i%100)==0
+    puts "#{i}..." if (i%1000)==0
+    total += 1
   end
+  
+  puts "No value for #{missing_count} of #{total} rows"
   
   # write file
   f = File.open("average_issue_year_month_submission.csv", 'w')
