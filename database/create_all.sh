@@ -17,3 +17,5 @@ mysql -u root < zip_plus4_data2_inserts.sql
 mysql -u root < zip_plus4_data3_inserts.sql
 mysql -u root < zip_plus4_data4_inserts.sql
 mysql -u root < zip_plus4_data5_inserts.sql
+
+mysql -u root < create_secondary_tables.sql

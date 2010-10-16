@@ -851,4 +851,3 @@ create table zip_plus4_data5 (
   MYSTERY_ELEMENT_A INT,
   MYSTERY_ELEMENT_B INT
 );
-

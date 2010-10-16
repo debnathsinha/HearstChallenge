@@ -171,6 +171,12 @@ where smo.issue_key = imo.issue_key
 group by smo.store_key, smo.title_key, year(imo.on_sale_date), month(imo.on_sale_date)
 
 
+are there any issues that span more than one month?
+- yes, heaps: 44371
+select * from issue_mo
+where month(on_sale_date) <> month(off_sale_date)
+
+This means that special handling is needed when preparing the sales data
 
 h2. Magazine
 

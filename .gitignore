@@ -4,3 +4,4 @@ data/zips
 database/*.sql
 !database/create_tables.sql
 !database/create_indexes.sql
+!database/create_secondary_tables.sql
