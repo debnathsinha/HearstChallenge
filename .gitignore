@@ -3,3 +3,4 @@ data/*.csv
 data/zips
 database/*.sql
 !database/create_tables.sql
+!database/create_indexes.sql

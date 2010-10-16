@@ -1,4 +1,4 @@
-# basic analysis
+# basic analysis - basic reports with ruby push sql at the db
 
 require "rubygems"
 require "active_record"
@@ -123,7 +123,7 @@ def print_sales_mo_stats
   print_size("Average Chains/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(chain_key)) as c from sales_mo group by title_key) as t"))
   print_size("Average Wholesalers/Title", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(wholesaler_key)) as c from sales_mo group by title_key) as t"))
   # issue stats
-    print_size("Average Records/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by issue_key) as t"))
+  print_size("Average Records/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(*) as c from sales_mo group by issue_key) as t"))
   print_size("Average Wholesalers/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(wholesaler_key)) as c from sales_mo group by issue_key) as t"))
   print_size("Average Chains/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(chain_key)) as c from sales_mo group by issue_key) as t"))
   print_size("Average Stores/Issue", TemplateVd.count_by_sql("select avg(c) as average from (select count(distinct(store_key)) as c from sales_mo group by issue_key) as t"))
