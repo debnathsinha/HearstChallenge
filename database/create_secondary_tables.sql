@@ -75,5 +75,5 @@ insert into template_vd3 (wholesaler_key, store_key, title_key, on_year, on_mont
 select s.wholesaler_key, v.store_key, v.title_key, v.on_year, v.on_month, v.sales_total
 from template_vd2 v, sales_vd s
 where v.store_key = s.store_key
-group by s.wholesaler_key, v.store_key, v.title_key, on_year, on_month;
+group by s.wholesaler_key, store_key, title_key, on_year, on_month;
 
