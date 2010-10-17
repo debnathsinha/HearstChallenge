@@ -240,6 +240,8 @@ where month(on_sale_date) <> month(off_sale_date)
 This means that special handling is needed when preparing the sales data
 No, it means there may be issue interference effects that could be modelled
 
+
+
 h2. Demographics
 
 An analysis of demographics information
@@ -253,7 +255,56 @@ h2. Wholesaler
 An analysis of wholesaler information
 
 
+h2. Prediction
 
+predicting for the verification submission dataset
+
+h3. sales
+
+h4. all zeros
+
+no sales (all zeros) gives an RMSE of 23.0487
+
+h4. average sales (all stores/issues/years/months)
+
+average of all sales is 9.9273 
+gives an RMSE of 20.1289
+
+
+h4. average of issue/year/month for all stores
+
+distinct issue/year/month in the verification data
+* select title_key, on_year, on_month from template_vd2 group by title_key, on_year, on_month
+* select count(*) from (select title_key, on_year, on_month from template_vd2 group by title_key, on_year, on_month) as abc;
+There are 283 distinct issue/year/month for 492,100 records
+
+we can take the average sales across issue/year/month for all stores in the sales_mo database:
+* select mo.title_key as title_key, mo.on_year as on_year, mo.on_month as on_month, avg(mo.sales_total) as sales_total from template_mo mo, (select title_key, on_year, on_month from template_vd2 group by title_key, on_year, on_month) as vd where mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month group by title_key, on_year, on_month
+
+How many of these distinct 283 records exist in the sales_mo database?
+* we can take a count of the above query - get the number of averages calculated
+* the result is 283 - that is all cases covered
+
+the submission rmse is 18.06
+
+h4. average of issue/year/month by store wholesaler 
+
+there are 65 wholesalers in the sales_mo table and 40 in the sales_vd
+
+are all vd wholesalers mo wholesalers?
+no, two are not
+* select vd.wholesaler_key 
+from (select distinct(wholesaler_key) from sales_vd) vd 
+where vd.wholesaler_key not in (select distinct(wholesaler_key) from sales_mo);
+
+how many stores does this effect
+* 19 of 2456
+* select count(distinct(s.store_key))
+from sales_vd s,
+(select vd.wholesaler_key from (select distinct(wholesaler_key) from sales_vd) vd where vd.wholesaler_key not in (select distinct(wholesaler_key) from sales_mo)) d
+where s.wholesaler_key = d.wholesaler_key
+
+how many distinct wholesaler/issue/year/month records are there for template_vd2
 
 
 
