@@ -305,6 +305,18 @@ from sales_vd s,
 where s.wholesaler_key = d.wholesaler_key
 
 how many distinct wholesaler/issue/year/month records are there for template_vd2
+* there are 7802
+* select count(*) from
+(select t.title_key as title_key, t.on_year as on_year, t.on_month as on_month, s.wholesaler_key as wholesaler_key
+from template_vd2 t, sales_vd s, (select distinct(wholesaler_key) from sales_mo) d
+where t.store_key = s.store_key
+and s.wholesaler_key = d.wholesaler_key
+group by title_key, on_year, on_month, wholesaler_key) as abc
+
+we can select the average issue sales for wholesaler/issue/year/month and use the average issue/year/month for those that have no results
+the query for the first part is
+
+- re-created template tables to include wholesaler information to make the join easier
 
 
 
