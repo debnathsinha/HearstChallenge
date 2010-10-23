@@ -161,8 +161,6 @@ using (title_key, store_key)
 group by wholesaler_key, title_key, on_year, on_month;
 
 -- wholesaler_title_year_month_sales_vd
-
-
 drop table IF EXISTS wholesaler_title_year_month_sales_vd;
 
 create table wholesaler_title_year_month_sales_vd (
@@ -180,3 +178,74 @@ select t.wholesaler_key, t.title_key, t.on_year, t.on_month, m.sales_total
 from template_vd2_wholesaler t
 INNER JOIN template_mo_wholesaler m
 using (wholesaler_key, title_key, on_year, on_month);
+
+-- store_chain_vd
+drop table if exists store_chain_vd;
+
+create table store_chain_vd (
+	store_key int not null,
+	chain_key int not null
+);
+
+create index store_chain_vd_index1 using btree on store_chain_vd (store_key, chain_key)
+
+insert into store_chain_vd(store_key, chain_key)
+select distinct store_key, chain_key from template_vd inner join sales_vd using (store_key, title_key);
+
+-- store_chain_mo
+drop table if exists store_chain_mo;
+
+create table store_chain_mo (
+	store_key int not null,
+	chain_key int not null
+);
+
+create index store_chain_mo_index1 using btree on store_chain_mo (store_key, chain_key)
+
+insert into store_chain_mo(store_key, chain_key)
+select distinct store_key, chain_key from sales_mo;
+
+-- chain_title_year_month_sales_mo
+
+drop table IF EXISTS chain_title_year_month_sales_mo;
+
+create table chain_title_year_month_sales_mo (
+	chain_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+CREATE INDEX chain_title_year_month_sales_mo_index1 USING BTREE ON chain_title_year_month_sales_mo (chain_key, title_key, on_year, on_month);
+
+insert into chain_title_year_month_sales_mo(chain_key, title_key, on_year, on_month, sales_total)
+select chain_key, title_key, on_year, on_month, avg(sales_total)
+from template_mo t inner join store_chain_mo using (store_key)
+group by chain_key, title_key, on_year, on_month
+
+-- chain_title_year_month_sales_td
+
+drop table IF EXISTS chain_title_year_month_sales_td;
+
+create table chain_title_year_month_sales_td (
+	chain_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+CREATE INDEX chain_title_year_month_sales_td_index1 USING BTREE ON chain_title_year_month_sales_td (chain_key, title_key, on_year, on_month);
+
+insert into chain_title_year_month_sales_td(chain_key, title_key, on_year, on_month, sales_total)
+select distinct c.chain_key, t.title_key, t.on_year, t.on_month, mo.sales_total
+from template_vd2 t, store_chain_vd c, chain_title_year_month_sales_mo mo
+where c.store_key = t.store_key
+and mo.title_key = t.title_key 
+and mo.on_year = t.on_year
+and mo.on_month = t.on_month
+and mo.chain_key = c.chain_key;
+
+
+

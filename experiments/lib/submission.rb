@@ -46,6 +46,7 @@ class Submission
     f.close
     puts "Wrote #{lines_array.length} lines to file '#{filename}'"
   end
+  
 end
 
 

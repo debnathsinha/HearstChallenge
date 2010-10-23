@@ -9,14 +9,17 @@ class AvgTitleYearMonth < Submission
   
   def initialize(filename)
     super(filename)
-    # prepare database
-    @yearMonthSales = YearMonthSales.new
-    @yearMonthSales.load
+    @totals = {}
+    # prep data
+    init_title_sales
+  end
+  
+  def init_title_sales
+    # data
     @titleYearMonthSales = TitleYearMonthSales.new
     @titleYearMonthSales.load
-    # prepare counters
-    @total_title_year_month = 0
-    @total_year_month = 0
+    # counter
+    @totals["title/year/month"] = 0
   end
   
   def output_filename
@@ -24,21 +27,19 @@ class AvgTitleYearMonth < Submission
   end
   
   def get_sales(store, title, year, month)
-    # try title-year-month
-    sales = @titleYearMonthSales.get_sales(title, year, month)
-    # try year-month as a fallback
-    if sales.nil?
-      sales = @yearMonthSales.get_sales(year, month) 
-      @total_year_month += 1
-    else 
-      @total_title_year_month += 1
-    end
+    return get_title_sales(store, title, year, month)
+  end
+  
+  def get_title_sales(store, title, year, month)
+    sales = @titleYearMonthSales.get_sales(title, year, month) 
+    raise "no data for: title=#{title}, year=#{year}, month=#{month}" if sales.nil?
+    @totals["title/year/month"] += 1 if !sales.nil?
     return sales
   end
   
   def final_report
-    puts "Total title/year/month: #{@total_title_year_month}"
-    puts "Total year/month: #{@total_year_month}"
+    puts ""
+    @totals.keys.sort.each {|key| puts "Total #{key} records: #{@totals[key]}" }
   end
   
 end

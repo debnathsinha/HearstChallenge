@@ -261,17 +261,13 @@ predicting for the verification submission dataset
 
 h3. sales
 
-h4. all zeros
-
-no sales (all zeros) gives an RMSE of 23.0487
-
-h4. average sales (all stores/issues/years/months)
+h4. average sales
 
 average of all sales is 9.9273 
 gives an RMSE of 20.1289
 
 
-h4. average of year/month sales for all stores/issues/etc
+h4. year/month average sales
 
 How many distinct year/months are there in vd?
 * 29
@@ -289,8 +285,7 @@ where vd.on_year = mo.on_year and vd.on_month = mo.on_month
 group by vd.on_year, vd.on_month
 
 
-
-h4. average of issue/year/month for all stores
+h4. title/year/month average sales
 
 distinct issue/year/month in the verification data
 * select title_key, on_year, on_month from template_vd2 group by title_key, on_year, on_month
@@ -306,7 +301,7 @@ How many of these distinct 283 records exist in the sales_mo database?
 
 the submission rmse is 18.06
 
-h4. average of issue/year/month by store wholesaler 
+h4. wholesaler/title/year/month average sales
 
 In this case we are interested in aggregating mo store/title/year/month average sales by wholesaler. The idea is to join vd stores to this data by their store/title wholesaler. 
 
@@ -356,6 +351,24 @@ What is the strategy?
 - prepare title/year/month sales averages as a fallback
 - prepare wholesaler/title/year/month sales averages
 - find the best fit for each entry in the test data
+
+The rmse was 17.4556
+
+
+h4. chain/title/year/month average sales
+
+There are 282 distinct chains in the sales_vd table
+
+How many chains in the template data are not in the mo data?
+* there are 98 of 282 that are not in the mo data
+* select count(*) from (select distinct chain_key from sales_vd) vd where chain_key not in (select distinct chain_key from sales_mo);
+
+is there a one-to-one between a store and a chain?
+* 0
+* select * from (select store_key, count(distinct chain_key) as c from sales_mo group by store_key) where c>1
+
+
+
 
 
 h2.  Licenses

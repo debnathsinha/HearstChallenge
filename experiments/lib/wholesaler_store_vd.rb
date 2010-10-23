@@ -33,7 +33,7 @@ class WholesalerStore
   end
   
   def to_key(store, title)
-    raise "Invalid key data: year=#{store}, month=#{title}" if store.nil? or title.nil?
+    raise "Invalid key data: store=#{store}, title=#{title}" if store.nil? or title.nil?
     return "#{store}-#{title}"
   end
 end
