@@ -23,7 +23,7 @@ class AvgTitleYearMonth < Submission
   end
   
   def output_filename
-    return "avg_title_year_month_submission.csv"
+    return "submissions/avg_title_year_month_submission.csv"
   end
   
   def get_sales(store, title, year, month)

@@ -6,4 +6,4 @@ database/*.sql
 !database/create_tables.sql
 !database/create_indexes.sql
 !database/create_secondary_tables.sql
-experiments/*.csv
+experiments/submissions/*.csv

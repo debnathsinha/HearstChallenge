@@ -367,7 +367,7 @@ is there a one-to-one between a store and a chain?
 * 0
 * select * from (select store_key, count(distinct chain_key) as c from sales_mo group by store_key) where c>1
 
-
+performing a cascade through chain, wholesaler, title based results, the RMSE was 13.3009
 
 
 
