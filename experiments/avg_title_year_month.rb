@@ -5,7 +5,7 @@ require "lib/submission"
 require "lib/title_year_month_sales"
 require "lib/year_month_sales"
 
-class AvgTitleYearMonthZeros < Submission
+class AvgTitleYearMonth < Submission
   
   def initialize(filename)
     super(filename)
@@ -48,7 +48,7 @@ if __FILE__ == $0
   ActiveRecord::Base.establish_connection(:adapter=>"mysql", :host => "localhost",
     :username=>"root", :database=>"hearst_challenge")
   # create submission 
-  o = AvgTitleYearMonthZeros.new("../data/template_for_submission.csv")
+  o = AvgTitleYearMonth.new("../data/template_for_submission.csv")
   o.generate_submission
   o.final_report
 end

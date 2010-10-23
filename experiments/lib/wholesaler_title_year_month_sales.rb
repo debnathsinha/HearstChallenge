@@ -6,7 +6,7 @@ class WholesalerTitleYearMonthSalesAR < ActiveRecord::Base
   set_table_name "wholesaler_title_year_month_sales_vd"
 end
 
-class WholesalerTitleYearMonthSalesAR
+class WholesalerTitleYearMonthSales
   def initialize
     @map = {}
   end
@@ -23,7 +23,7 @@ class WholesalerTitleYearMonthSalesAR
       value = row["sales_total"].to_f
       @map[key] = value
     end
-    puts "WholesalerTitleYearMonthSalesAR loaded #{@map.size} average sales results"
+    puts "WholesalerTitleYearMonthSales loaded #{@map.size} average sales results"
   end
 
   def get_sales(wholesaler, title, year, month)
@@ -33,8 +33,8 @@ class WholesalerTitleYearMonthSalesAR
   end
   
   def to_key(wholesaler, title, year, month)
-    raise "Invalid key data: wholesaler=#{wholesaler}, title=#{title}, year=#{year}, month=#{month}" if wholesaler.nil? title.nil? or year.nil? or month.nil?
-    return "#{title}-#{year}-#{month}"
+    raise "Invalid key data: wholesaler=#{wholesaler}, title=#{title}, year=#{year}, month=#{month}" if wholesaler.nil? or title.nil? or year.nil? or month.nil?
+    return "#{wholesaler}-#{title}-#{year}-#{month}"
   end
   
 end
@@ -43,8 +43,8 @@ if __FILE__ == $0
   ActiveRecord::Base.establish_connection(:adapter=>"mysql", :host => "localhost",
     :username=>"root", :database=>"hearst_challenge")
   
-  puts "Test for WholesalerTitleYearMonthSalesAR..."
-  o = WholesalerTitleYearMonthSalesAR.new
+  puts "Test for WholesalerTitleYearMonthSales..."
+  o = WholesalerTitleYearMonthSales.new
   o.load  
   puts "done."
 end

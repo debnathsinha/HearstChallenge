@@ -124,7 +124,44 @@ template_mo mo
 where mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month 
 group by title_key, on_year, on_month
 
+-- template_vd2_wholesaler
+drop table IF EXISTS template_vd2_wholesaler;
+
+create table template_vd2_wholesaler (
+	wholesaler_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null
+);
+
+CREATE INDEX template_vd2_wholesaler_index1 USING BTREE ON template_vd2_wholesaler (wholesaler_key, title_key, on_year, on_month);
+
+insert into template_vd2_wholesaler(wholesaler_key, title_key, on_year, on_month)
+select distinct wholesaler_key, title_key, on_year, on_month
+from template_vd2 INNER JOIN wholesaler_store_vd
+using (title_key, store_key);
+
+-- template_mo_wholesaler
+drop table IF EXISTS template_mo_wholesaler;
+
+create table template_mo_wholesaler (
+	wholesaler_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+CREATE INDEX template_mo_wholesaler_index1 USING BTREE ON template_mo_wholesaler (wholesaler_key, title_key, on_year, on_month);
+
+insert into template_mo_wholesaler(wholesaler_key, title_key, on_year, on_month, sales_total)
+select w.wholesaler_key, title_key, on_year, on_month, avg(sales_total)
+from template_mo INNER JOIN wholesaler_store_mo w
+using (title_key, store_key)
+group by wholesaler_key, title_key, on_year, on_month;
+
 -- wholesaler_title_year_month_sales_vd
+
 
 drop table IF EXISTS wholesaler_title_year_month_sales_vd;
 
@@ -139,20 +176,7 @@ create table wholesaler_title_year_month_sales_vd (
 CREATE INDEX wholesaler_title_year_month_sales_vd_index1 USING BTREE ON wholesaler_title_year_month_sales_vd (wholesaler_key, title_key, on_year, on_month);
 
 insert into wholesaler_title_year_month_sales_vd(wholesaler_key, title_key, on_year, on_month, sales_total)
-select vd.wholesaler_key, vd.title_key, vd.on_year, vd.on_month, avg(mo.sales_total) 
-from
-(select distinct t.title_key, t.on_year, t.on_month, w.wholesaler_key
-from template_vd2 t, wholesaler_store_vd w
-where w.title_key = t.title_key 
-and w.store_key = t.store_key) vd,
-(select t.title_key, t.on_year, t.on_month, t.sales_total,  w.wholesaler_key
-from template_mo t, wholesaler_store_mo w
-where w.title_key = t.title_key 
-and w.store_key = t.store_key) mo
-where vd.wholesaler_key=mo.wholesaler_key and vd.title_key=mo.title_key and vd.on_year=mo.on_year and vd.on_month=mo.on_month
-group by vd.wholesaler_key, vd.title_key, vd.on_year, vd.on_month
-
-
-
-
-
+select t.wholesaler_key, t.title_key, t.on_year, t.on_month, m.sales_total
+from template_vd2_wholesaler t
+INNER JOIN template_mo_wholesaler m
+using (wholesaler_key, title_key, on_year, on_month);

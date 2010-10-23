@@ -39,7 +39,6 @@ class YearMonthSales
   end
 end
 
-
 if __FILE__ == $0
   ActiveRecord::Base.establish_connection(:adapter=>"mysql", :host => "localhost",
     :username=>"root", :database=>"hearst_challenge")
