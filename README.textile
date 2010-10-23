@@ -271,6 +271,25 @@ average of all sales is 9.9273
 gives an RMSE of 20.1289
 
 
+h4. average of year/month sales for all stores/issues/etc
+
+How many distinct year/months are there in vd?
+* 29
+** select count(distinct on_year, on_month) from template_vd2
+
+Is there sales data for all instances?
+* yes, all 29 records can join
+** select count(*) from (select distinct on_year, on_month from template_vd2) vd natural join (select distinct on_year, on_month from template_mo) mo
+
+What is the query to get the average sales?
+
+select vd.on_year, vd.on_month, avg(mo.sales_total) 
+from (select distinct on_year, on_month from template_vd2) vd, template_mo mo
+where vd.on_year = mo.on_year and vd.on_month = mo.on_month
+group by vd.on_year, vd.on_month
+
+
+
 h4. average of issue/year/month for all stores
 
 distinct issue/year/month in the verification data
@@ -289,35 +308,54 @@ the submission rmse is 18.06
 
 h4. average of issue/year/month by store wholesaler 
 
-there are 65 wholesalers in the sales_mo table and 40 in the sales_vd
+In this case we are interested in aggregating mo store/title/year/month average sales by wholesaler. The idea is to join vd stores to this data by their store/title wholesaler. 
 
-are all vd wholesalers mo wholesalers?
-no, two are not
-* select vd.wholesaler_key 
-from (select distinct(wholesaler_key) from sales_vd) vd 
-where vd.wholesaler_key not in (select distinct(wholesaler_key) from sales_mo);
+Firstly, which vd stores can and cannot be joined to the mo data?
 
-how many stores does this effect
-* 19 of 2456
-* select count(distinct(s.store_key))
-from sales_vd s,
-(select vd.wholesaler_key from (select distinct(wholesaler_key) from sales_vd) vd where vd.wholesaler_key not in (select distinct(wholesaler_key) from sales_mo)) d
-where s.wholesaler_key = d.wholesaler_key
+There are 2 vd wholesalers, 45 of which do not exist in the mo dataset (wholesaler_key: 22, 67)
+* select vd.wholesaler_key from (select distinct(wholesaler_key) from wholesaler_store_vd) vd where vd.wholesaler_key not in (select distinct(wholesaler_key) from wholesaler_store_mo);
+* select count(distinct wholesaler_key) from wholesaler_store_vd
 
-how many distinct wholesaler/issue/year/month records are there for template_vd2
-* there are 7802
-* select count(*) from
-(select t.title_key as title_key, t.on_year as on_year, t.on_month as on_month, s.wholesaler_key as wholesaler_key
-from template_vd2 t, sales_vd s, (select distinct(wholesaler_key) from sales_mo) d
-where t.store_key = s.store_key
-and s.wholesaler_key = d.wholesaler_key
-group by title_key, on_year, on_month, wholesaler_key) as abc
+This effects 38 of 2500 vd stores
+* select count(distinct store_key) from wholesaler_store_vd where wholesaler_key in (22, 67)
+* select count(distinct store_key) from wholesaler_store_vd
 
-we can select the average issue sales for wholesaler/issue/year/month and use the average issue/year/month for those that have no results
-the query for the first part is
+This effects 155 of 19502 vs store-titles
+* select count(distinct store_key, title_key) from wholesaler_store_vd where wholesaler_key in (22, 67)
+* select count(distinct store_key, title_key) from wholesaler_store_vd
 
-- re-created template tables to include wholesaler information to make the join easier
+This is a little too high-level. We need to test the specific join cases. 
 
+How many discrete wholesaler/title/year/month records are there in the vd dataset? 
+* There are 283 distinct title/year/month records of 492,100 total records
+** select count(distinct title_key, on_year, on_month) from template_vd2
+* There are 11705 distinct wholesaler/title/year/month records
+** select count(distinct t.title_key, t.on_year, t.on_month, w.wholesaler_key) from template_vd2 t, wholesaler_store_vd w where w.title_key = t.title_key and w.store_key = t.store_key
+
+How many of these can and cannot be joined to to the mo dataset?
+* 11158 distinct wholesaler/title/year/month records can be joined from vd to mo, leaving 548 records.
+** select count(*) from (select distinct t.title_key, t.on_year, t.on_month, w.wholesaler_key from template_vd2 t, wholesaler_store_vd w where w.title_key = t.title_key  and w.store_key = t.store_key) a_vd NATURAL JOIN (select distinct t.title_key, t.on_year, t.on_month, w.wholesaler_key from template_mo t, wholesaler_store_mo w where w.title_key = t.title_key and w.store_key = t.store_key) a_mo
+
+What is the query to calculate the average sales for each case in a single query?
+select vd.title_key, vd.on_year, vd.on_month, avg(mo.sales_total) 
+from
+(select distinct t.title_key, t.on_year, t.on_month, w.wholesaler_key
+from template_vd2 t, wholesaler_store_vd w
+where w.title_key = t.title_key 
+and w.store_key = t.store_key) vd,
+(select t.title_key, t.on_year, t.on_month, t.sales_total,  w.wholesaler_key
+from template_mo t, wholesaler_store_mo w
+where w.title_key = t.title_key 
+and w.store_key = t.store_key) mo
+where vd.wholesaler_key=mo.wholesaler_key and vd.title_key=mo.title_key and vd.on_year=mo.on_year and vd.on_month=mo.on_month
+group by vd.wholesaler_key, vd.title_key, vd.on_year, vd.on_month
+
+What is the strategy?
+- prepare an in memory table of distinct store/title=>wholesaler id's for the vd data
+- prepare year/month sales averages as a fallback
+- prepare title/year/month sales averages as a fallback
+- prepare wholesaler/title/year/month sales averages
+- find the best fit for each entry in the test data
 
 
 h2.  Licenses

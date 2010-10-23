@@ -55,25 +55,104 @@ select store_key, title_key, CONVERT(substring(yearmonth, 1, 4), SIGNED), CONVER
 from template_vd;
 
 
--- template_vd3
-drop table IF EXISTS template_vd3;
+-- wholesaler_store_vd
+drop table IF EXISTS wholesaler_store_vd;
 
-create table template_vd3 (
-	wholesaler_key int, 
-	store_key int not null, 
-	title_key int not null, 
-	on_year int not null,
-	on_month int not null,
-	sales_total int
+create table wholesaler_store_vd (
+	wholesaler_key int not null, 
+	store_key int not null,
+	title_key int not null
 );
 
-CREATE INDEX template_td2_key_index_1 USING BTREE ON template_vd3 (store_key, title_key, on_year, on_month);
+CREATE INDEX wholesaler_store_vd_index1 USING BTREE ON wholesaler_store_vd (wholesaler_key, store_key, title_key);
 
-CREATE INDEX template_td2_key_index_2 USING BTREE ON template_vd3 (wholesaler_key, store_key, title_key, on_year, on_month);
+insert into wholesaler_store_vd (wholesaler_key, store_key, title_key)
+select distinct s.wholesaler_key, v.store_key, v.title_key
+from template_vd v, sales_vd s
+where v.store_key = s.store_key;
 
-insert into template_vd3 (wholesaler_key, store_key, title_key, on_year, on_month, sales_total)
-select s.wholesaler_key, v.store_key, v.title_key, v.on_year, v.on_month, v.sales_total
-from template_vd2 v, sales_vd s
-where v.store_key = s.store_key
-group by s.wholesaler_key, store_key, title_key, on_year, on_month;
+
+-- wholesaler_store_mo
+drop table IF EXISTS wholesaler_store_mo;
+
+create table wholesaler_store_mo (
+	wholesaler_key int not null, 
+	store_key int not null,
+	title_key int not null
+);
+
+CREATE INDEX wholesaler_store_mo_index1 USING BTREE ON wholesaler_store_mo (wholesaler_key, store_key, title_key);
+
+insert into wholesaler_store_mo (wholesaler_key, store_key, title_key)
+select distinct s.wholesaler_key, v.store_key, v.title_key
+from template_mo v, sales_mo s
+where v.store_key = s.store_key;
+
+-- year_month_sales_vd
+drop table IF EXISTS year_month_sales_vd;
+
+create table year_month_sales_vd (
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+CREATE INDEX year_month_sales_vd_index1 USING BTREE ON year_month_sales_vd (on_year, on_month);
+
+insert into year_month_sales_vd (on_year, on_month, sales_total)
+select vd.on_year, vd.on_month, avg(mo.sales_total)
+from (select distinct on_year, on_month from template_vd2) vd, template_mo mo
+where vd.on_year = mo.on_year and vd.on_month = mo.on_month
+group by vd.on_year, vd.on_month;
+
+-- title_year_month_sales_vd
+drop table IF EXISTS title_year_month_sales_vd;
+
+create table title_year_month_sales_vd (
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+CREATE INDEX title_year_month_sales_vd_index1 USING BTREE ON title_year_month_sales_vd (title_key, on_year, on_month);
+
+insert into title_year_month_sales_vd(title_key, on_year, on_month, sales_total)
+select vd.title_key, vd.on_year, vd.on_month, avg(mo.sales_total) 
+from (select distinct title_key, on_year, on_month from template_vd2) vd,
+template_mo mo
+where mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month 
+group by title_key, on_year, on_month
+
+-- wholesaler_title_year_month_sales_vd
+
+drop table IF EXISTS wholesaler_title_year_month_sales_vd;
+
+create table wholesaler_title_year_month_sales_vd (
+	wholesaler_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+CREATE INDEX wholesaler_title_year_month_sales_vd_index1 USING BTREE ON wholesaler_title_year_month_sales_vd (wholesaler_key, title_key, on_year, on_month);
+
+insert into wholesaler_title_year_month_sales_vd(wholesaler_key, title_key, on_year, on_month, sales_total)
+select vd.wholesaler_key, vd.title_key, vd.on_year, vd.on_month, avg(mo.sales_total) 
+from
+(select distinct t.title_key, t.on_year, t.on_month, w.wholesaler_key
+from template_vd2 t, wholesaler_store_vd w
+where w.title_key = t.title_key 
+and w.store_key = t.store_key) vd,
+(select t.title_key, t.on_year, t.on_month, t.sales_total,  w.wholesaler_key
+from template_mo t, wholesaler_store_mo w
+where w.title_key = t.title_key 
+and w.store_key = t.store_key) mo
+where vd.wholesaler_key=mo.wholesaler_key and vd.title_key=mo.title_key and vd.on_year=mo.on_year and vd.on_month=mo.on_month
+group by vd.wholesaler_key, vd.title_key, vd.on_year, vd.on_month
+
+
+
+
 
