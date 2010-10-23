@@ -1,6 +1,7 @@
 .DS_Store
 data/*.csv
 data/zips
+data/old_files
 database/*.sql
 !database/create_tables.sql
 !database/create_indexes.sql
