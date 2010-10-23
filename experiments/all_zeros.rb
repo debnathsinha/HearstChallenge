@@ -1,24 +1,18 @@
 # prepare a submission of all zeros
 
-if __FILE__ == $0
-  
-  output_lines = []
-  # build output
-  File.open("../data/template_for_submission.csv").each_with_index do |line, i|
-    line = line.strip
-    if i==0
-      output_lines << line
-      next #skip
-    end
-    store, title, yearmonth = line.split(",")
-    output_lines << "#{store},#{title},#{yearmonth},#{0.0}"
-    puts "#{i}..." if (i%1000)==0
+require "lib/submission"
+
+class AllZeros < Submission
+  def output_filename
+    return "all_zeros_submission.csv"
   end
   
-  # write file
-  f = File.open("all_zeros_submission.csv", 'w')
-  output_lines.each do |line|
-    f.write(line + "\n")    
+  def get_sales(store, title, year, month)
+    return 0.0
   end
-  f.close
+end
+
+if __FILE__ == $0  
+  o = AllZeros.new("../data/template_for_submission.csv")
+  o.generate_submission
 end
