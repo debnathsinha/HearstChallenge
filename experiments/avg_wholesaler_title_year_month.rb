@@ -31,7 +31,7 @@ class AvgWholesalerTitleYearMonth < Submission
     wholesaler = @storeTitleToWholesaler.get_wholesaler(store, title)
     raise "Could not find wholesaler for store=#{store}, title=#{title}" if wholesaler.nil?
     # try wholesaler-title-year-month
-    sales = @wholesalerTitleYearMonthSales.get_sales(wholesaler.to_i, title, year, month)
+    sales = @wholesalerTitleYearMonthSales.get_sales(wholesaler, title, year, month)
     # try title-year-month as a fallback
     if sales.nil?
       sales = @titleYearMonthSales.get_sales(title, year, month) 

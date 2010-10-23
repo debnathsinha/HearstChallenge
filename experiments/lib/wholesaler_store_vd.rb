@@ -21,7 +21,7 @@ class WholesalerStore
     raise "Query failed" if rs.nil? or rs.size<=0    
     rs.each do |row|
       key = to_key(row["store_key"], row["title_key"])
-      value = row["wholesaler_key"].to_f
+      value = row["wholesaler_key"].to_i
       @map[key] = value
     end
     puts "WholesalerStore loaded #{@map.size} wholesaler-store records"
