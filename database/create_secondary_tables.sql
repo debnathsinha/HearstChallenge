@@ -214,7 +214,7 @@ create table chain_title_year_month_sales_mo (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total decimal(18,9) not null default 0
 );
 
 CREATE INDEX chain_title_year_month_sales_mo_index1 USING BTREE ON chain_title_year_month_sales_mo (chain_key, title_key, on_year, on_month);
@@ -233,7 +233,7 @@ create table chain_title_year_month_sales_td (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total decimal(18,9) not null default 0
 );
 
 CREATE INDEX chain_title_year_month_sales_td_index1 USING BTREE ON chain_title_year_month_sales_td (chain_key, title_key, on_year, on_month);
@@ -255,7 +255,7 @@ create table template_storetype_mo (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total decimal(18,9) not null default 0
 );
 
 create index template_storetype_mo_index1 using btree on template_storetype_mo (title_key, on_year, on_month)
@@ -272,7 +272,7 @@ create table template_state_mo (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total decimal(18,9) not null default 0
 );
 
 create index template_state_mo_index1 using btree on template_state_mo (title_key, on_year, on_month)
@@ -292,15 +292,17 @@ create table template_city_mo (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total float(18,9) not null default 0
 );
 
-create index template_city_mo_index1 using btree on template_city_mo (city, title_key, on_year, on_month)
+create index template_city_mo_index1 on template_city_mo (city, title_key, on_year, on_month)
 
 insert into template_city_mo(city, title_key, on_year, on_month, sales_total)
-select distinct city, title_key, on_year, on_month, avg(sales_total) as sales_total 
+select distinct city, title_key, on_year, on_month, avg(sales_total)
 from template_mo, store_mo where template_mo.store_key=store_mo.store_key 
-group by city, title_key, on_year, on_month
+group by city, title_key, on_year, on_month;
+
+select * from  template_city_mo
 
 
 -- template_state_chain_mo
@@ -312,7 +314,7 @@ create table template_state_chain_mo (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total decimal(18,9) not null default 0
 );
 
 create index template_state_chain_mo_index1 on template_state_chain_mo (state, chain_key, title_key, on_year, on_month)
@@ -333,7 +335,7 @@ create table template_state_storetype_mo (
 	title_key int not null,
 	on_year int not null,
 	on_month int not null,
-	sales_total decimal(8,6) not null default 0
+	sales_total decimal(18,9) not null default 0
 );
 
 create index template_state_storetype_mo_index1 on template_state_storetype_mo (state, store_type, title_key, on_year, on_month)
@@ -343,5 +345,86 @@ select distinct state, or_cot_desc as store_type, title_key, on_year, on_month, 
 from template_mo, store_mo
 where template_mo.store_key=store_mo.store_key 
 group by state, store_type, title_key, on_year, on_month;
+
+
+-- template_city_chain_mo
+drop table if exists template_city_chain_mo;
+
+create table template_city_chain_mo (
+	city varchar(255) not null,
+	chain_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+create index template_city_chain_mo_index1 on template_city_chain_mo (city, chain_key, title_key, on_year, on_month)
+
+insert into template_city_chain_mo(city, chain_key, title_key, on_year, on_month, sales_total)
+select distinct city, chain_key, title_key, on_year, on_month, avg(sales_total)
+from template_mo, store_mo
+where template_mo.store_key=store_mo.store_key 
+group by city, chain_key, title_key, on_year, on_month;
+
+-- template_vd3_index_1
+drop table IF EXISTS template_vd3;
+
+create table template_vd3 (
+	store_key int not null, 
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	chain_key int not null, 
+	state varchar(255) not null,
+	city varchar(255) not null,
+	store_type varchar(255) not null,
+	zip_code int not null
+);
+
+CREATE INDEX template_vd3_index_1 USING BTREE ON template_vd3 (store_key, title_key, on_year, on_month, chain_key, state, city, store_type, zip_code);
+
+insert into template_vd3 (store_key, title_key, on_year, on_month, chain_key, state, city, store_type, zip_code)
+select t.store_key, title_key, on_year, on_month, chain_key, state, city, or_cot_desc, zip_code
+from template_vd2 t, store_vd s
+where s.store_key=t.store_key;
+
+-- template_city_chain_vd
+
+drop table IF EXISTS template_city_chain_vd;
+
+create table template_city_chain_vd (
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	chain_key int not null, 
+	city varchar(255) not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX template_city_chain_vd_index1 ON template_city_chain_vd (title_key, on_year, on_month, chain_key, city, sales_total);
+
+insert into template_city_chain_vd (title_key, on_year, on_month, chain_key, city, sales_total)
+select distinct t.title_key, t.on_year, t.on_month, t.chain_key, t.city, c.sales_total
+from template_vd3 t, template_city_chain_mo c
+where t.title_key=c.title_key and t.on_year=c.on_year and t.on_month=c.on_month and t.chain_key=c.chain_key and t.city=c.city;
+
+
+-- store_city_vd
+
+drop table IF EXISTS store_city_vd;
+
+create table store_city_vd (
+	store_key int not null, 
+	city varchar(255) not null
+);
+
+CREATE INDEX store_city_vd_index1 ON store_city_vd (store_key, city);
+
+insert into store_city_vd(store_key, city)
+select distinct store_key, city from template_vd3;
+
+
+
 
 

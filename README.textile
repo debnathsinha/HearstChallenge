@@ -385,11 +385,13 @@ Variance in the sales totals for the ~3M records in the 2009 model data and vari
 | Wholesaler/Title/Year/Month | 8.36551 |
 | Chain/Title/Year/Month | 5.35888 |
 | StoreType/Title/Year/Month | 6.83674 |
-| City/Title/Year/Month | ? | 
+| City/Title/Year/Month | 7.78722 | 
 | State/Title/Year/Month | 8.77748 | 
 | ZipCode/Title/Year/Month | ? | 
 | State/Chain/Title/Year/Month | 5.05807 |
 | State/StoreType/Title/Year/Month | 6.32165 |
+| City/Chain/Title/Year/Month | 2.1031 |
+
 
 
 h2.  Licenses
