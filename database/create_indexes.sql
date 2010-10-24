@@ -7,6 +7,14 @@ CREATE INDEX wholesaler_key_index USING BTREE ON sales_vd (wholesaler_key);
 CREATE INDEX wholesaler_store_key_index USING BTREE ON sales_vd (store_key, wholesaler_key);
 CREATE INDEX sales_vd_index1 USING BTREE ON sales_vd (store_key, title_key);
 
+-- template_vd
+CREATE INDEX template_td_key_index_1 USING BTREE ON template_vd (store_key, title_key, yearmonth);
+CREATE INDEX template_td_key_index_2 USING BTREE ON template_vd (store_key, title_key);
+
+-- store_vd
+CREATE INDEX store_vd_index_1 USING BTREE ON store_vd (store_key);
+
+
 -- issue_mo
 CREATE INDEX issue_key_index USING BTREE ON issue_mo (issue_key);
 
@@ -18,7 +26,5 @@ CREATE INDEX wholesaler_key_index USING BTREE ON sales_mo (wholesaler_key);
 CREATE INDEX wholesaler_store_key_index USING BTREE ON sales_mo (store_key, wholesaler_key);
 CREATE INDEX chain_key_index USING BTREE ON sales_mo (chain_key);
 
-
--- template_vd
-CREATE INDEX template_td_key_index_1 USING BTREE ON template_vd (store_key, title_key, yearmonth);
-CREATE INDEX template_td_key_index_2 USING BTREE ON template_vd (store_key, title_key);
+-- store_mo
+CREATE INDEX store_mo_index_1 USING BTREE ON store_mo (store_key);

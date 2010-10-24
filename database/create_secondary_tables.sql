@@ -247,5 +247,101 @@ and mo.on_year = t.on_year
 and mo.on_month = t.on_month
 and mo.chain_key = c.chain_key;
 
+-- template_storetype_mo
+drop table if exists template_storetype_mo;
+
+create table template_storetype_mo (
+	store_type varchar(255) not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+create index template_storetype_mo_index1 using btree on template_storetype_mo (title_key, on_year, on_month)
+
+insert into template_storetype_mo(store_type, title_key, on_year, on_month, sales_total)
+select distinct or_cot_desc as store_type, title_key, on_year, on_month, avg(sales_total) as sales_total 
+from template_mo, store_mo where template_mo.store_key=store_mo.store_key group by store_type, title_key, on_year, on_month
+
+-- template_state_mo
+drop table if exists template_state_mo;
+
+create table template_state_mo (
+	state varchar(255) not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+create index template_state_mo_index1 using btree on template_state_mo (title_key, on_year, on_month)
+
+insert into template_state_mo(state, title_key, on_year, on_month, sales_total)
+select distinct state, title_key, on_year, on_month, avg(sales_total) as sales_total 
+from template_mo, store_mo where template_mo.store_key=store_mo.store_key 
+group by state, title_key, on_year, on_month;
+
+
+
+-- template_city_mo
+drop table if exists template_city_mo;
+
+create table template_city_mo (
+	city varchar(255) not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+create index template_city_mo_index1 using btree on template_city_mo (city, title_key, on_year, on_month)
+
+insert into template_city_mo(city, title_key, on_year, on_month, sales_total)
+select distinct city, title_key, on_year, on_month, avg(sales_total) as sales_total 
+from template_mo, store_mo where template_mo.store_key=store_mo.store_key 
+group by city, title_key, on_year, on_month
+
+
+-- template_state_chain_mo
+drop table if exists template_state_chain_mo;
+
+create table template_state_chain_mo (
+	state varchar(255) not null,
+	chain_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+create index template_state_chain_mo_index1 on template_state_chain_mo (state, chain_key, title_key, on_year, on_month)
+
+insert into template_state_chain_mo(state, chain_key, title_key, on_year, on_month, sales_total)
+select distinct state, chain_key, title_key, on_year, on_month, avg(sales_total) as sales_total 
+from template_mo, store_mo
+where template_mo.store_key=store_mo.store_key 
+group by state, chain_key, title_key, on_year, on_month;
+
+
+-- template_state_storetype_mo
+drop table if exists template_state_storetype_mo;
+
+create table template_state_storetype_mo (
+	state varchar(255) not null,
+	store_type varchar(255) not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(8,6) not null default 0
+);
+
+create index template_state_storetype_mo_index1 on template_state_storetype_mo (state, store_type, title_key, on_year, on_month)
+
+insert into template_state_storetype_mo(state, store_type, title_key, on_year, on_month, sales_total)
+select distinct state, or_cot_desc as store_type, title_key, on_year, on_month, avg(sales_total) as sales_total 
+from template_mo, store_mo
+where template_mo.store_key=store_mo.store_key 
+group by state, store_type, title_key, on_year, on_month;
 
 

@@ -371,6 +371,27 @@ performing a cascade through chain, wholesaler, title based results, the RMSE wa
 
 
 
+h2. Exploration
+
+The exploration of hypotheses on the model data.
+
+h3. Variance Experiments
+
+Variance in the sales totals for the ~3M records in the 2009 model data and various aggregation strategies.
+
+|_. Aggregation |_. Average Difference |
+| Year/Month | 10.31046 |
+| Title/Year/Month | 8.96702 |
+| Wholesaler/Title/Year/Month | 8.36551 |
+| Chain/Title/Year/Month | 5.35888 |
+| StoreType/Title/Year/Month | 6.83674 |
+| City/Title/Year/Month | ? | 
+| State/Title/Year/Month | 8.77748 | 
+| ZipCode/Title/Year/Month | ? | 
+| State/Chain/Title/Year/Month | 5.05807 |
+| State/StoreType/Title/Year/Month | 6.32165 |
+
+
 h2.  Licenses
 
 (c) Copyright 2010 Jason Brownlee. Some Rights Reserved.
