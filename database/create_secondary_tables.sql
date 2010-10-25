@@ -426,5 +426,38 @@ select distinct store_key, city from template_vd3;
 
 
 
+-- template_storetype_vd
+
+drop table IF EXISTS template_storetype_vd;
+
+create table template_storetype_vd (
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	store_type varchar(255) not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX template_storetype_vd_index1 ON template_storetype_vd (title_key, on_year, on_month, store_type, sales_total);
+
+insert into template_storetype_vd (title_key, on_year, on_month, store_type, sales_total)
+select distinct t.title_key, t.on_year, t.on_month, t.store_type, c.sales_total
+from template_vd3 t, template_storetype_mo c
+where t.title_key=c.title_key and t.on_year=c.on_year and t.on_month=c.on_month and t.store_type=c.store_type;
+
+-- store_storetype_vd
+
+drop table IF EXISTS store_storetype_vd;
+
+create table store_storetype_vd (
+	store_key int not null, 
+	store_type varchar(255) not null
+);
+
+CREATE INDEX store_storetype_vd_index1 ON store_storetype_vd (store_key, store_type);
+
+insert into store_storetype_vd(store_key, store_type)
+select distinct store_key, store_type from template_vd3;
+
 
 
