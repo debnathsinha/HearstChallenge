@@ -1019,9 +1019,11 @@ CREATE INDEX template_vd_store_neighbours_in_mo_index1 ON template_vd_store_neig
 
 insert into template_vd_store_neighbours_in_mo(store_key, title_key, on_year, on_month, neighbour_store_key)
 select distinct vd.store_key, vd.title_key, vd.on_year, vd.on_month, mo.store_key
-from template_mo mo inner join (select distinct store_key, title_key, on_month, on_year from template_vd3) vd
+from template_vd3 vd inner join template_mo mo
 using (title_key, on_month, on_year);
 
+
+select * from template_vd3;
 
 
 

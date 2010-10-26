@@ -2,10 +2,10 @@
 
 require "lib/submission"
 
-require "lib/store_vd_neighbour_store"
+require "lib/store_vd_neighbour_stores2"
 require "lib/store_mo_metadata"
 require "lib/store_vd_metadata"
-
+require "lib/stores_mo_title_year_month_sales"
 
 class AvgSimpleNeighbourTitleYearMonth < Submission
   
@@ -20,16 +20,14 @@ class AvgSimpleNeighbourTitleYearMonth < Submission
     @kParameter = 20
     
     # helpers
-
     @storeVdMetadata = StoreVdMetadata.new(fields)
     @storeVdMetadata.load
-
-    @storeAvgSalesMo = nil
     
-    @storeNeighbours = StoreNeighbourStores.new(fields)
-    @storeNeighbours.load
+    @storeAvgSalesMo = StoresMoTitleYearMonthSales.new
     
-    @storeMoMetadata = StoreMoNeighbourMetadata.new
+    @storeNeighbours = StoreNeighbourStores.new
+    
+    @storeMoMetadata = StoreMoNeighbourMetadata.new(fields)
     
     @totals["neighbours/title/year/month"] = 0
   end
@@ -56,8 +54,8 @@ class AvgSimpleNeighbourTitleYearMonth < Submission
     neighbour_stores = @storeMoMetadata.get_k_neighbours(@kParameter, store_metadata, stores)
     # get the average sales
     sales = @storeAvgSalesMo.get_sales(neighbour_stores, title, year, month)
-    
-    @totals["storetype/title/year/month"] += 1 if !sales.nil?
+    # update totals
+    @totals["neighbours/title/year/month"] += 1 if !sales.nil?
     return sales
   end
 end
