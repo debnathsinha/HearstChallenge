@@ -392,6 +392,29 @@ Variance in the sales totals for the ~3M records in the 2009 model data and vari
 | State/StoreType/Title/Year/Month | 6.32165 |
 | City/Chain/Title/Year/Month | 2.1031 |
 
+some of these are no good - vd data does not have the same cities or states - well, it does have the same city names, but they are in different states.
+
+h3. Store NN
+
+The idea here is to investigate the relationships between stores based on their demographics. Specifically find stores that are similar by store area demographics information. The the predictability of similar stores sales information for a given title-year-month. This means, under these conditions, that another store can only be considered a neighbour if it also has a title-year-month combination in common. In fact it would be interesting to know the average number of possible candidates exists for each combination in the validation dataset - it is likely we can only get K>3 for a few stores.
+
+Side note: this also hints that neighbours could be found by seeking stores with similar title selling patterns (can this be determined?)
+
+Data
+* there are 283 distinct cases of title-year-month in the template_vd table
+* all of them can join to the template_mo table
+* the average number of matches for each record into the template_mo table is 331.251
+** one may assume that each record represents a different store, so that is ~331 stores per record 
+* we can ease the initial query for each record by preparing a secondary table that only contains matching records and the relevant store metadata to be matched against.
+** perhaps all meta data?
+* how many distinct records are in that set?
+** there are 283 distinct records in the set
+** there are 39,374 distinct stores in the set
+
+It also occurs to me that candidate stores can be prepared, so the computation process would: 1) pre-compute the store metadata needed for a submission and 2) pre-compute relevant stores for each record. From this we can ad-hoc aggregate sales information for stores with an ordered calculated distance score.
+
+
+
 
 
 h2.  Licenses

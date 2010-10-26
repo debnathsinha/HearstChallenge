@@ -37,7 +37,6 @@ class TitleYearMonthSales
     raise "Invalid key data: title=#{title}, year=#{year}, month=#{month}" if title.nil? or year.nil? or month.nil?
     return "#{title}-#{year}-#{month}"
   end
-  
 end
 
 

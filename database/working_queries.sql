@@ -976,3 +976,53 @@ insert into store_storetype_vd(store_key, store_type)
 select distinct store_key, store_type from template_vd3;
 
 select * from store_storetype_vd
+
+
+-- NN explorations
+
+select count(distinct title_key, on_month, on_year) from template_vd3
+
+select count(distinct title_key, on_month, on_year)
+from template_vd3 vd inner join template_mo mo 
+using (title_key, on_month, on_year)
+
+select avg(c) from
+(select title_key, on_month, on_year, count(mo.sales_total) as c
+from template_vd3 inner join (select distinct title_key, on_month, on_year, sales_total from template_mo) mo
+using (title_key, on_month, on_year)
+group by title_key, on_month, on_year) a
+
+
+select count(distinct title_key, on_month, on_year)
+from template_mo inner join (select distinct title_key, on_month, on_year from template_vd3) vs
+using (title_key, on_month, on_year)
+
+select count(distinct mo.store_key)
+from template_mo mo inner join (select distinct title_key, on_month, on_year from template_vd3) vd
+using (title_key, on_month, on_year)
+
+
+
+-- template_vd_store_neighbours_in_mo
+
+drop table if exists template_vd_store_neighbours_in_mo;
+
+create table template_vd_store_neighbours_in_mo(
+	store_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	neighbour_store_key int not null 
+);
+
+CREATE INDEX template_vd_store_neighbours_in_mo_index1 ON template_vd_store_neighbours_in_mo (store_key, title_key, on_year, on_month, neighbour_store_key);
+
+insert into template_vd_store_neighbours_in_mo(store_key, title_key, on_year, on_month, neighbour_store_key)
+select distinct vd.store_key, vd.title_key, vd.on_year, vd.on_month, mo.store_key
+from template_mo mo inner join (select distinct store_key, title_key, on_month, on_year from template_vd3) vd
+using (title_key, on_month, on_year);
+
+
+
+
+

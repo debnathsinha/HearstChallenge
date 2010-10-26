@@ -1,9 +1,9 @@
-
-# SUBMISSION_TEMPLATE_FILENAME = "../../data/template_for_submission.csv"
+# template for generating submission files
 
 class Submission
   def initialize(filename)
     @template_filename = filename
+    @totals = {}
   end
 
   def output_filename
@@ -47,6 +47,10 @@ class Submission
     puts "Wrote #{lines_array.length} lines to file '#{filename}'"
   end
   
+  def final_report
+    puts ""
+    @totals.keys.sort.each {|key| puts "Total #{key} records: #{@totals[key]}" }
+  end
 end
 
 

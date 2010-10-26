@@ -9,7 +9,6 @@ class AvgTitleYearMonth < Submission
   
   def initialize(filename)
     super(filename)
-    @totals = {}
     # prep data
     init_title_sales
   end
@@ -36,12 +35,6 @@ class AvgTitleYearMonth < Submission
     @totals["title/year/month"] += 1 if !sales.nil?
     return sales
   end
-  
-  def final_report
-    puts ""
-    @totals.keys.sort.each {|key| puts "Total #{key} records: #{@totals[key]}" }
-  end
-  
 end
 
 if __FILE__ == $0

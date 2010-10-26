@@ -459,5 +459,21 @@ CREATE INDEX store_storetype_vd_index1 ON store_storetype_vd (store_key, store_t
 insert into store_storetype_vd(store_key, store_type)
 select distinct store_key, store_type from template_vd3;
 
+-- template_vd_store_neighbours_in_mo
 
+drop table if exists template_vd_store_neighbours_in_mo;
 
+create table template_vd_store_neighbours_in_mo(
+	store_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	neighbour_store_key int not null 
+);
+
+CREATE INDEX template_vd_store_neighbours_in_mo_index1 ON template_vd_store_neighbours_in_mo (store_key, title_key, on_year, on_month, neighbour_store_key);
+
+insert into template_vd_store_neighbours_in_mo(store_key, title_key, on_year, on_month, neighbour_store_key)
+select distinct vd.store_key, vd.title_key, vd.on_year, vd.on_month, mo.store_key
+from template_vd3 vd inner join template_mo mo
+using (title_key, on_month, on_year);
