@@ -1,6 +1,6 @@
 -- create all databases needed for the competition
 
-drop database hearst_challenge;
+drop database if exists hearst_challenge;
 
 create database hearst_challenge;
 	

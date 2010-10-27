@@ -82,22 +82,22 @@ if __FILE__ == $0
   puts "starting..."
 
   # validation
-  create_file("../data/sales_vd_dataset.csv", "sales_vd")
-  create_file("../data/store_vd_dataset.csv", "store_vd")
+#  create_file("../data/sales_vd_dataset.csv", "sales_vd")
+#  create_file("../data/store_vd_dataset.csv", "store_vd")
   create_file("../data/template_for_submission.csv", "template_vd", false)
 
   # model
-  create_file("../data/issue_mo_dataset.csv", "issue_mo")
-  create_file("../data/sales_mo_dataset.csv", "sales_mo")
-  create_file("../data/store_mo_dataset.csv", "store_mo")
-  create_file("../data/wholesaler_mo_dataset.csv", "wholesaler_mo")
+#  create_file("../data/issue_mo_dataset.csv", "issue_mo")
+#  create_file("../data/sales_mo_dataset.csv", "sales_mo")
+#  create_file("../data/store_mo_dataset.csv", "store_mo")
+#  create_file("../data/wholesaler_mo_dataset.csv", "wholesaler_mo")
 
   # big files...
-  create_file("../data/zip_plus4_data_1.csv", "zip_plus4_data1")
-  create_file("../data/zip_plus4_data_2.csv", "zip_plus4_data2")
-  create_file("../data/zip_plus4_data_3.csv", "zip_plus4_data3")
-  create_file("../data/zip_plus4_data_4.csv", "zip_plus4_data4")
-  create_file("../data/zip_plus4_data_5.csv", "zip_plus4_data5")
+#  create_file("../data/zip_plus4_data_1.csv", "zip_plus4_data1")
+#  create_file("../data/zip_plus4_data_2.csv", "zip_plus4_data2")
+#  create_file("../data/zip_plus4_data_3.csv", "zip_plus4_data3")
+#  create_file("../data/zip_plus4_data_4.csv", "zip_plus4_data4")
+#  create_file("../data/zip_plus4_data_5.csv", "zip_plus4_data5")
 
   puts "done."
 end

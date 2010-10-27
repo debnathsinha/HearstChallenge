@@ -122,7 +122,7 @@ select vd.title_key, vd.on_year, vd.on_month, avg(mo.sales_total)
 from (select distinct title_key, on_year, on_month from template_vd2) vd,
 template_mo mo
 where mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month 
-group by title_key, on_year, on_month
+group by title_key, on_year, on_month;
 
 -- template_vd2_wholesaler
 drop table IF EXISTS template_vd2_wholesaler;
@@ -222,7 +222,7 @@ CREATE INDEX chain_title_year_month_sales_mo_index1 USING BTREE ON chain_title_y
 insert into chain_title_year_month_sales_mo(chain_key, title_key, on_year, on_month, sales_total)
 select chain_key, title_key, on_year, on_month, avg(sales_total)
 from template_mo t inner join store_chain_mo using (store_key)
-group by chain_key, title_key, on_year, on_month
+group by chain_key, title_key, on_year, on_month;
 
 -- chain_title_year_month_sales_td
 
@@ -262,7 +262,7 @@ create index template_storetype_mo_index1 using btree on template_storetype_mo (
 
 insert into template_storetype_mo(store_type, title_key, on_year, on_month, sales_total)
 select distinct or_cot_desc as store_type, title_key, on_year, on_month, avg(sales_total) as sales_total 
-from template_mo, store_mo where template_mo.store_key=store_mo.store_key group by store_type, title_key, on_year, on_month
+from template_mo, store_mo where template_mo.store_key=store_mo.store_key group by store_type, title_key, on_year, on_month;
 
 -- template_state_mo
 drop table if exists template_state_mo;
@@ -275,7 +275,7 @@ create table template_state_mo (
 	sales_total decimal(18,9) not null default 0
 );
 
-create index template_state_mo_index1 using btree on template_state_mo (title_key, on_year, on_month)
+create index template_state_mo_index1 using btree on template_state_mo (title_key, on_year, on_month);
 
 insert into template_state_mo(state, title_key, on_year, on_month, sales_total)
 select distinct state, title_key, on_year, on_month, avg(sales_total) as sales_total 
@@ -295,14 +295,12 @@ create table template_city_mo (
 	sales_total float(18,9) not null default 0
 );
 
-create index template_city_mo_index1 on template_city_mo (city, title_key, on_year, on_month)
+create index template_city_mo_index1 on template_city_mo (city, title_key, on_year, on_month);
 
 insert into template_city_mo(city, title_key, on_year, on_month, sales_total)
 select distinct city, title_key, on_year, on_month, avg(sales_total)
 from template_mo, store_mo where template_mo.store_key=store_mo.store_key 
 group by city, title_key, on_year, on_month;
-
-select * from  template_city_mo
 
 
 -- template_state_chain_mo
@@ -317,7 +315,7 @@ create table template_state_chain_mo (
 	sales_total decimal(18,9) not null default 0
 );
 
-create index template_state_chain_mo_index1 on template_state_chain_mo (state, chain_key, title_key, on_year, on_month)
+create index template_state_chain_mo_index1 on template_state_chain_mo (state, chain_key, title_key, on_year, on_month);
 
 insert into template_state_chain_mo(state, chain_key, title_key, on_year, on_month, sales_total)
 select distinct state, chain_key, title_key, on_year, on_month, avg(sales_total) as sales_total 
@@ -338,7 +336,7 @@ create table template_state_storetype_mo (
 	sales_total decimal(18,9) not null default 0
 );
 
-create index template_state_storetype_mo_index1 on template_state_storetype_mo (state, store_type, title_key, on_year, on_month)
+create index template_state_storetype_mo_index1 on template_state_storetype_mo (state, store_type, title_key, on_year, on_month);
 
 insert into template_state_storetype_mo(state, store_type, title_key, on_year, on_month, sales_total)
 select distinct state, or_cot_desc as store_type, title_key, on_year, on_month, avg(sales_total) as sales_total 
@@ -359,7 +357,7 @@ create table template_city_chain_mo (
 	sales_total decimal(18,9) not null default 0
 );
 
-create index template_city_chain_mo_index1 on template_city_chain_mo (city, chain_key, title_key, on_year, on_month)
+create index template_city_chain_mo_index1 on template_city_chain_mo (city, chain_key, title_key, on_year, on_month);
 
 insert into template_city_chain_mo(city, chain_key, title_key, on_year, on_month, sales_total)
 select distinct city, chain_key, title_key, on_year, on_month, avg(sales_total)
@@ -477,3 +475,5 @@ insert into template_vd_store_neighbours_in_mo(store_key, title_key, on_year, on
 select distinct vd.store_key, vd.title_key, vd.on_year, vd.on_month, mo.store_key
 from template_vd3 vd inner join template_mo mo
 using (title_key, on_month, on_year);
+
+
