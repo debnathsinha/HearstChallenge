@@ -187,7 +187,7 @@ create table store_chain_vd (
 	chain_key int not null
 );
 
-create index store_chain_vd_index1 using btree on store_chain_vd (store_key, chain_key)
+create index store_chain_vd_index1 using btree on store_chain_vd (store_key, chain_key);
 
 insert into store_chain_vd(store_key, chain_key)
 select distinct store_key, chain_key from template_vd inner join sales_vd using (store_key, title_key);
