@@ -1018,13 +1018,41 @@ create table template_vd_store_neighbours_in_mo(
 CREATE INDEX template_vd_store_neighbours_in_mo_index1 ON template_vd_store_neighbours_in_mo (store_key, title_key, on_year, on_month, neighbour_store_key);
 
 insert into template_vd_store_neighbours_in_mo(store_key, title_key, on_year, on_month, neighbour_store_key)
+
 select distinct vd.store_key, vd.title_key, vd.on_year, vd.on_month, mo.store_key
 from template_vd3 vd inner join template_mo mo
 using (title_key, on_month, on_year);
 
 
+select count(distinct mo.store_key)
+from template_vd3 vd, template_mo mo
+where vd.store_key=33 and vd.title_key=1 and vd.on_year=2007 and vd.on_month=8
+and mo.title_key=vd.title_key and mo.on_year=vd.on_year and mo.on_month=vd.on_month;
+
+
 select * from template_vd3;
 
 
+select * from template_vd_store_neighbours_in_mo;
 
+
+select avg(sales_total) as sales_total 
+from template_mo 
+where title_key=1 and on_year=2007 and on_month=8 and store_key in (2,3,4,5) 
+group by title_key, on_year, on_month;
+
+
+select * from store_mo where store_key=38481
+
+select * from template_mo;
+
+select count(store_key) from template_mo;
+
+select count(store_key) from store_mo;
+
+select 
+store_key,
+summarized_area_lvl_statistics_a, summarized_area_lvl_statistics_b, summarized_area_lvl_statistics_c, summarized_area_lvl_statistics_d, 
+summarized_area_lvl_statistics_e, summarized_area_lvl_statistics_f, summarized_area_lvl_statistics_g, summarized_area_lvl_statistics_h
+from store_mo;
 

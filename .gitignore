@@ -9,3 +9,4 @@ database/*.sql
 !database/create_secondary_tables.sql
 !database/working_queries.sql
 experiments/submissions/*.csv
+experiments/export/*.dat

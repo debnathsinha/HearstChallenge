@@ -413,6 +413,9 @@ Data
 
 It also occurs to me that candidate stores can be prepared, so the computation process would: 1) pre-compute the store metadata needed for a submission and 2) pre-compute relevant stores for each record. From this we can ad-hoc aggregate sales information for stores with an ordered calculated distance score.
 
+too slow
+
+
 
 
 
