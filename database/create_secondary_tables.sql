@@ -200,7 +200,7 @@ create table store_chain_mo (
 	chain_key int not null
 );
 
-create index store_chain_mo_index1 using btree on store_chain_mo (store_key, chain_key)
+create index store_chain_mo_index1 using btree on store_chain_mo (store_key, chain_key);
 
 insert into store_chain_mo(store_key, chain_key)
 select distinct store_key, chain_key from sales_mo;
@@ -258,7 +258,7 @@ create table template_storetype_mo (
 	sales_total decimal(18,9) not null default 0
 );
 
-create index template_storetype_mo_index1 using btree on template_storetype_mo (title_key, on_year, on_month)
+create index template_storetype_mo_index1 using btree on template_storetype_mo (title_key, on_year, on_month);
 
 insert into template_storetype_mo(store_type, title_key, on_year, on_month, sales_total)
 select distinct or_cot_desc as store_type, title_key, on_year, on_month, avg(sales_total) as sales_total 
