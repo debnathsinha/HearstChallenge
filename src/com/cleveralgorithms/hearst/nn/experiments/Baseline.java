@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.cleveralgorithms.hearst.nn.Configuration;
-import com.cleveralgorithms.hearst.nn.OfflineTestNearestNeighbourSales;
+import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales;
 
-public class Baseline extends OfflineTestNearestNeighbourSales 
+public class Baseline extends ImpTestNearestNeighbourSales 
 {
 	public List<Configuration> getConfigurations()
 	{

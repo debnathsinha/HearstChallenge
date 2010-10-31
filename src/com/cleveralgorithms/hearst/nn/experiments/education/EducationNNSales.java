@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.cleveralgorithms.hearst.nn.Configuration;
-import com.cleveralgorithms.hearst.nn.OfflineTestNearestNeighbourSales;
+import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales;
 
-public class EducationNNSales extends OfflineTestNearestNeighbourSales {
+public class EducationNNSales extends ImpTestNearestNeighbourSales {
 
 	@Override
 	protected String[] getFields() {

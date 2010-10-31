@@ -1,4 +1,4 @@
-package com.cleveralgorithms.hearst.nn.experiments.summarized;
+package com.cleveralgorithms.hearst.nn.experiments.residence;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,16 +6,14 @@ import java.util.List;
 import com.cleveralgorithms.hearst.nn.Configuration;
 import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales;
 
-public class SummarizedChainNNSales extends ImpTestNearestNeighbourSales {
+public class ResidenceChainNNSales extends ImpTestNearestNeighbourSales {
 
 	@Override
 	protected String[] getFields() {
 		return new String[]{
 				"chain_key",
-				"summarized_area_lvl_statistics_a", "summarized_area_lvl_statistics_b", 
-				"summarized_area_lvl_statistics_c", "summarized_area_lvl_statistics_d", 
-				"summarized_area_lvl_statistics_e", "summarized_area_lvl_statistics_f",
-				"summarized_area_lvl_statistics_g", "summarized_area_lvl_statistics_h"}; 
+				"length_of_residence_under_1_yr", "length_of_residence_1_yr", 
+				"length_of_residence_2_to_5_yrs","length_of_residence_6_to_10_yrs","length_of_residence_10__yrs","length_of_residence_unknown"}; 
 	}
 
 	public List<Configuration> getConfigurations()
@@ -33,7 +31,7 @@ public class SummarizedChainNNSales extends ImpTestNearestNeighbourSales {
 		
 		return list;
 	}
-	
+
 	protected double calculateDistanceToStore(Integer trainStoreId, Integer testStoreId)
 	{
 		double [] v1 = trainStores.get(trainStoreId);
@@ -50,8 +48,8 @@ public class SummarizedChainNNSales extends ImpTestNearestNeighbourSales {
 		return euclideanDistance(v1,v2);
 	}
 	
-
 	public static void main(String[] args) {
-		new SummarizedChainNNSales().run();
-	}	
+		new ResidenceChainNNSales().run();
+	}
+	
 }

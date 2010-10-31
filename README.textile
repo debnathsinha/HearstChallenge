@@ -15,7 +15,7 @@ h3. Baseline
 
 The following provides a baseline of average title/year/month sales for each record.
 
-XXX
+| Baseline[k=999999] | 100% | 26.756|
 
 h3. Chain
 
@@ -50,11 +50,185 @@ h4. Summarized
 | SummarizedNNSales[k=500] | 99.955% | 26.552|
 | SummarizedNNSales[k=1000] | 99.955% | 26.584|
 
-h4. Chain + Summarized
-
 The following table provides results form summarized area level statistics preconditioned on first matching the same chain.
 
-XXX
+|_. Model |_. Coverage |_. RMSE |
+| SummarizedChainNNSales[k=1] | 98.535% | 23.582|
+| SummarizedChainNNSales[k=3] | 98.535% | 20.954|
+| SummarizedChainNNSales[k=5] | 98.535% | 20.94|
+| SummarizedChainNNSales[k=10] | 98.535% | 21.82|
+| SummarizedChainNNSales[k=50] | 98.535% | 21.379|
+| SummarizedChainNNSales[k=100] | 98.535% | 21.427|
+| SummarizedChainNNSales[k=500] | 98.535% | 21.497|
+| SummarizedChainNNSales[k=1000] | 98.535% | 21.502|
+
+h3. Age Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| AgeNNSales[k=1] | 99.77% | 29.919|
+| AgeNNSales[k=3] | 99.77% | 27.245|
+| AgeNNSales[k=5] | 99.77% | 26.51|
+| AgeNNSales[k=10] | 99.77% | 26.903|
+| AgeNNSales[k=50] | 99.77% | 26.569|
+| AgeNNSales[k=100] | 99.77% | 26.465|
+| AgeNNSales[k=500] | 99.77% | 26.583|
+| AgeNNSales[k=1000] | 99.77% | 26.671|
+
+h3. Dwelling Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| DwellingSizeNNSales[k=1] | 99.77% | 31.323|
+| DwellingSizeNNSales[k=3] | 99.77% | 27.813|
+| DwellingSizeNNSales[k=5] | 99.77% | 27.008|
+| DwellingSizeNNSales[k=10] | 99.77% | 26.867|
+| DwellingSizeNNSales[k=50] | 99.77% | 26.661|
+| DwellingSizeNNSales[k=100] | 99.77% | 26.645|
+| DwellingSizeNNSales[k=500] | 99.77% | 26.599|
+| DwellingSizeNNSales[k=1000] | 99.77% | 26.666|
+
+h3. DwellingType Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| DwellingTypeNNSales[k=1] | 99.77% | 34.458|
+| DwellingTypeNNSales[k=3] | 99.77% | 30.186|
+| DwellingTypeNNSales[k=5] | 99.77% | 28.049|
+| DwellingTypeNNSales[k=10] | 99.77% | 27.23|
+| DwellingTypeNNSales[k=50] | 99.77% | 26.732|
+| DwellingTypeNNSales[k=100] | 99.77% | 26.578|
+| DwellingTypeNNSales[k=500] | 99.77% | 26.594|
+| DwellingTypeNNSales[k=1000] | 99.77% | 26.661|
+
+h3. Education Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| EducationNNSales[k=1] | 99.77% | 29.811|
+| EducationNNSales[k=3] | 99.77% | 27.313|
+| EducationNNSales[k=5] | 99.77% | 26.967|
+| EducationNNSales[k=10] | 99.77% | 26.848|
+| EducationNNSales[k=50] | 99.77% | 26.534|
+| EducationNNSales[k=100] | 99.77% | 26.42|
+| EducationNNSales[k=500] | 99.77% | 26.479|
+| EducationNNSales[k=1000] | 99.77% | 26.542|
+
+h3. Gender Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| GenderNNSales[k=1] | 99.77% | 30.69|
+| GenderNNSales[k=3] | 99.77% | 27.528|
+| GenderNNSales[k=5] | 99.77% | 27.792|
+| GenderNNSales[k=10] | 99.77% | 26.984|
+| GenderNNSales[k=50] | 99.77% | 26.561|
+| GenderNNSales[k=100] | 99.77% | 26.574|
+| GenderNNSales[k=500] | 99.77% | 26.6|
+| GenderNNSales[k=1000] | 99.77% | 26.656|
+
+h3. Homeowner Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| HomeownerNNSales[k=1] | 99.77% | 36.471|
+| HomeownerNNSales[k=3] | 99.77% | 28.016|
+| HomeownerNNSales[k=5] | 99.77% | 27.643|
+| HomeownerNNSales[k=10] | 99.77% | 26.924|
+| HomeownerNNSales[k=50] | 99.77% | 26.698|
+| HomeownerNNSales[k=100] | 99.77% | 26.563|
+| HomeownerNNSales[k=500] | 99.77% | 26.605|
+| HomeownerNNSales[k=1000] | 99.77% | 26.659|
+
+h3. Household Status Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| HouseHoldStatusNNSales[k=1] | 99.77% | 30.337|
+| HouseHoldStatusNNSales[k=3] | 99.77% | 28.109|
+| HouseHoldStatusNNSales[k=5] | 99.77% | 27.08|
+| HouseHoldStatusNNSales[k=10] | 99.77% | 26.964|
+| HouseHoldStatusNNSales[k=50] | 99.77% | 26.636|
+| HouseHoldStatusNNSales[k=100] | 99.77% | 26.633|
+| HouseHoldStatusNNSales[k=500] | 99.77% | 26.636|
+| HouseHoldStatusNNSales[k=1000] | 99.77% | 26.692|
+
+h3. Income Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| IncomeNNSales[k=1] | 99.77% | 29.922|
+| IncomeNNSales[k=3] | 99.77% | 27.172|
+| IncomeNNSales[k=5] | 99.77% | 26.616|
+| IncomeNNSales[k=10] | 99.77% | 26.9|
+| IncomeNNSales[k=50] | 99.77% | 26.451|
+| IncomeNNSales[k=100] | 99.77% | 26.414|
+| IncomeNNSales[k=500] | 99.77% | 26.519|
+| IncomeNNSales[k=1000] | 99.77% | 26.588|
+
+h3. Marital Status Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| MaritalStatusNNSales[k=1] | 99.77% | 29.994|
+| MaritalStatusNNSales[k=3] | 99.77% | 27.098|
+| MaritalStatusNNSales[k=5] | 99.77% | 26.603|
+| MaritalStatusNNSales[k=10] | 99.77% | 26.724|
+| MaritalStatusNNSales[k=50] | 99.77% | 26.497|
+| MaritalStatusNNSales[k=100] | 99.77% | 26.469|
+| MaritalStatusNNSales[k=500] | 99.77% | 26.536|
+| MaritalStatusNNSales[k=1000] | 99.77% | 26.63|
+
+h3. Mvh Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| MvhStatusNNSales[k=1] | 99.77% | 31.26|
+| MvhStatusNNSales[k=3] | 99.77% | 28.091|
+| MvhStatusNNSales[k=5] | 99.77% | 26.988|
+| MvhStatusNNSales[k=10] | 99.77% | 26.854|
+| MvhStatusNNSales[k=50] | 99.77% | 26.5|
+| MvhStatusNNSales[k=100] | 99.77% | 26.368|
+| MvhStatusNNSales[k=500] | 99.77% | 26.478|
+| MvhStatusNNSales[k=1000] | 99.77% | 26.537|
+
+h3. Occupation Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| OccupationNNSales[k=1] | 99.77% | 30.481|
+| OccupationNNSales[k=3] | 99.77% | 28.217|
+| OccupationNNSales[k=5] | 99.77% | 28.223|
+| OccupationNNSales[k=10] | 99.77% | 27.183|
+| OccupationNNSales[k=50] | 99.77% | 26.528|
+| OccupationNNSales[k=100] | 99.77% | 26.424|
+| OccupationNNSales[k=500] | 99.77% | 26.503|
+| OccupationNNSales[k=1000] | 99.77% | 26.582|
+
+h3. Residence Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| ResidenceNNSales[k=1] | 99.77% | 29.916|
+| ResidenceNNSales[k=3] | 99.77% | 29.376|
+| ResidenceNNSales[k=5] | 99.77% | 27.801|
+| ResidenceNNSales[k=10] | 99.77% | 26.98|
+| ResidenceNNSales[k=50] | 99.77% | 26.617|
+| ResidenceNNSales[k=100] | 99.77% | 26.565|
+| ResidenceNNSales[k=500] | 99.77% | 26.603|
+| ResidenceNNSales[k=1000] | 99.77% | 26.677|
+
+h3. Size Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| SizeNNSales[k=1] | 99.77% | 30.66|
+| SizeNNSales[k=3] | 99.77% | 28.154|
+| SizeNNSales[k=5] | 99.77% | 27.02|
+| SizeNNSales[k=10] | 99.77% | 27.243|
+| SizeNNSales[k=50] | 99.77% | 26.707|
+| SizeNNSales[k=100] | 99.77% | 26.65|
+| SizeNNSales[k=500] | 99.77% | 26.642|
+| SizeNNSales[k=1000] | 99.77% | 26.696|
+
+h3. Vehicles Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| VehiclesNNSales[k=1] | 99.615% | 28.92|
+| VehiclesNNSales[k=3] | 99.615% | 26.852|
+| VehiclesNNSales[k=5] | 99.615% | 26.303|
+| VehiclesNNSales[k=10] | 99.615% | 26.477|
+| VehiclesNNSales[k=50] | 99.615% | 26.151|
+| VehiclesNNSales[k=100] | 99.615% | 26.166|
+| VehiclesNNSales[k=500] | 99.615% | 26.29|
+| VehiclesNNSales[k=1000] | 99.615% | 26.323|
 
 
 

@@ -1,9 +1,11 @@
-package com.cleveralgorithms.hearst;
+package com.cleveralgorithms.hearst.submission;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.cleveralgorithms.hearst.FileIO;
 
 public class GenerateSubmission 
 {
@@ -112,4 +114,5 @@ public class GenerateSubmission
 	{
 		new GenerateSubmission().run();
 	}
+	
 }
