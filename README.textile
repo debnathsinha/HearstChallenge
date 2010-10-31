@@ -3,6 +3,66 @@ h1. Hearst Challenge
 This project documents the participation of Jason Brownlee in the "Hearst Analytics Challenge":http://hearstchallenge.com/
 
 
+h2. Test Harness
+
+The test harness is currently composed of a fixed random selection 20K 2009 records from the template_mo2 table.
+
+h2. Nearest Neighbour Experiments
+
+Nearest neighbour experiments against the test harness.
+
+h3. Baseline
+
+The following provides a baseline of average title/year/month sales for each record.
+
+XXX
+
+h3. Chain
+
+The following table of results considers pseudo random neighbourhoods of stores with the same chain.
+
+|_. Model |_. Coverage |_. RMSE |
+| ChainNNSales[k=1] | 98.555% | 49.61|
+| ChainNNSales[k=3] | 98.555% | 25.74|
+| ChainNNSales[k=5] | 98.555% | 24.176|
+| ChainNNSales[k=10] | 98.555% | 22.106|
+| ChainNNSales[k=50] | 98.555% | 21.719|
+| ChainNNSales[k=100] | 98.555% | 21.624|
+| ChainNNSales[k=500] | 98.555% | 21.574|
+| ChainNNSales[k=1000] | 98.555% | 21.57|
+| ChainNNSales[k=999999] | 98.555% | 21.569|
+
+The results show that averaging against all stores with the same chain provides the best results.
+
+h3. Summarized Area Level Statistics
+
+This section considers neighbouring stores based on summarized area level statistics.
+
+h4. Summarized
+
+|_. Model |_. Coverage |_. RMSE |
+| SummarizedNNSales[k=1] | 99.955% | 30.165|
+| SummarizedNNSales[k=3] | 99.955% | 28.335|
+| SummarizedNNSales[k=5] | 99.955% | 26.697|
+| SummarizedNNSales[k=10] | 99.955% | 26.463|
+| SummarizedNNSales[k=50] | 99.955% | 26.587|
+| SummarizedNNSales[k=100] | 99.955% | 26.566|
+| SummarizedNNSales[k=500] | 99.955% | 26.552|
+| SummarizedNNSales[k=1000] | 99.955% | 26.584|
+
+h4. Chain + Summarized
+
+The following table provides results form summarized area level statistics preconditioned on first matching the same chain.
+
+XXX
+
+
+
+
+
+
+
+
 h2. Provided Data
 
 This section summarized the data that was provided on October 14th 2010.
