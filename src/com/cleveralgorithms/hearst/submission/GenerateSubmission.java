@@ -1,18 +1,19 @@
 package com.cleveralgorithms.hearst.submission;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import com.cleveralgorithms.hearst.FileIO;
+import com.cleveralgorithms.hearst.MutableInteger;
 
 public class GenerateSubmission 
 {
 	public final static String TEMPLATE_FILENAME = "data/template_for_submission.csv";	
 	
+	private Map<String,MutableInteger> counts = new HashMap<String,MutableInteger>();
 	
 	public List<SalesModel> getSalesModels()
 	{
@@ -44,9 +45,16 @@ public class GenerateSubmission
 		List<SalesModel> models = getSalesModels();
 		
 		// build template
-		String templateData = createOutputString(TEMPLATE_FILENAME, models);		
+		String templateData = createOutputString(TEMPLATE_FILENAME, models);
 		// write file
 		writeOutput(getOutputFilename(), templateData);
+		
+		System.out.println();
+		for(String key : counts.keySet())
+		{
+			System.out.println(key+" totals: " + counts.get(key));
+		}
+		System.out.println();
 		
 		System.out.println("done");
 	}
@@ -73,14 +81,13 @@ public class GenerateSubmission
 				continue; 
 			}
 			String [] lineParts = line.trim().split(",");
-			String key = toSalesKey(lineParts[0].trim(), lineParts[1].trim(), lineParts[2].trim());
-			String salesTotal = salesMap.get(key);
+			String salesTotal = getSalesString(list, lineParts[0].trim(), lineParts[1].trim(), lineParts[2].trim());
 			if (salesTotal == null) {
-				throw new RuntimeException("No data for line "+ i+ "[key="+key+"], " + line);
+				throw new RuntimeException("No data for line "+ i+ " " + line);
 			}
 			addLine(buf, lineParts[0], lineParts[1], lineParts[2], salesTotal);
 			
-			if ((i%20000)==0) {	    		
+			if ((i%20000)==0) {
 	    		System.out.println(" "+i+" records");
 	    	}
 		}
@@ -92,18 +99,23 @@ public class GenerateSubmission
 	{
 		String year = yearMonth.substring(0,4);
 		String month = yearMonth.substring(4);
+		month = ""+Integer.parseInt(month); // get rid of trailing zeros
 		
 		String sales = null;
 		
 		for(SalesModel m : list) {
 			sales = m.getSalesString(store, title, year, month);
 			if (sales != null) {
+				String key = m.getClass().getSimpleName();
+				MutableInteger count = counts.get(key);
+				if (count == null) {
+					count = new MutableInteger(); 
+					counts.put(key, count);
+				}
+				count.increment();
+				
 				break;
 			}
-		}
-		
-		if (sales == null) {
-			throw new RuntimeException("Could not find sales data for record");
 		}
 		
 		return sales;
