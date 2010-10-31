@@ -25,7 +25,7 @@ public abstract class DefaultNearestNeighbourSales extends NearestNeighbourSales
 	
 	protected String prepareTrainSalesQuery()
 	{
-		return "select store_key, title_key, on_year, on_month, sales_total from template_mo";
+		return "select store_key, title_key, on_year, on_month, sales_total from template_mo2";
 	}
 	
 	protected String getTrainStoresQuery()

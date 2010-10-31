@@ -476,4 +476,23 @@ select distinct vd.store_key, vd.title_key, vd.on_year, vd.on_month, mo.store_ke
 from template_vd3 vd inner join template_mo mo
 using (title_key, on_month, on_year);
 
+-- template_mo2
+drop table IF EXISTS template_mo2;
+
+create table template_mo2 (
+	store_key int not null, 
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9)  not null
+);
+
+CREATE INDEX template_mo2_key_index_1 USING BTREE ON template_mo2 (store_key, title_key, on_year, on_month);
+
+insert into template_mo2 (store_key, title_key, on_year, on_month, sales_total)
+select smo.store_key, smo.title_key, imo.on_year, imo.on_month, sum(smo.sales)
+from issue_mo_2 imo, sales_mo smo
+where smo.issue_key = imo.issue_key
+and smo.sales >= 0
+group by smo.store_key, smo.title_key, imo.on_year, imo.on_month;
 
