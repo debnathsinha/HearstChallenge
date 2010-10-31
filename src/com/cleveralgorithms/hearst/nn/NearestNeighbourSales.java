@@ -18,7 +18,7 @@ public abstract class NearestNeighbourSales
 {
 	public final static int NUM_THREADS = 4;
 	
-	public final static boolean SHOW_SKIPPED = false;
+	public final static boolean SHOW_SKIPPED = true;
 	
 	// training records
 	protected Map<Integer,double[]> trainStores = new HashMap<Integer, double[]>();
@@ -217,9 +217,12 @@ public abstract class NearestNeighbourSales
 	}
 	
 	public final static double euclideanDistance(double [] v1, double [] v2) {
+		return euclideanDistance(v1, v2, 0);
+	}
+	public final static double euclideanDistance(double [] v1, double [] v2, int off) {
 		// default to euclidean distance
 		double sum = 0;
-		for (int i = 0; i < v2.length; i++) {
+		for (int i = off; i < v2.length; i++) {
 			double diff = v1[i]-v2[i];
 			sum += diff*diff;
 		}

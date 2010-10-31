@@ -1057,3 +1057,57 @@ summarized_area_lvl_statistics_e, summarized_area_lvl_statistics_f, summarized_a
 from store_mo;
 
 select * from store_vd where store_key = 26007;
+
+
+select * from template_mo
+
+select count(*) from template_mo where on_year = 2009 and on_month = 12
+
+
+select store_key,summarized_area_lvl_statistics_a, summarized_area_lvl_statistics_b, summarized_area_lvl_statistics_c, summarized_area_lvl_statistics_d, 
+summarized_area_lvl_statistics_e, summarized_area_lvl_statistics_f, summarized_area_lvl_statistics_g, summarized_area_lvl_statistics_h from store_mo 
+where summarized_area_lvl_statistics_a <> NULL AND summarized_area_lvl_statistics_b <> NULL AND summarized_area_lvl_statistics_c <> NULL AND 
+summarized_area_lvl_statistics_d <> NULL AND summarized_area_lvl_statistics_e <> NULL AND summarized_area_lvl_statistics_f <> NULL AND 
+summarized_area_lvl_statistics_g <> NULL AND summarized_area_lvl_statistics_h <> NULL
+
+
+select * from store_mo;
+
+desc store_mo;
+
+desc sales_mo
+
+select count(*) from sales_mo where sales<0
+
+desc issue_mo_2
+
+
+-- template_mo2
+drop table IF EXISTS template_mo2;
+
+create table template_mo2 (
+	store_key int not null, 
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9)  not null
+);
+
+CREATE INDEX template_mo2_key_index_1 USING BTREE ON template_mo2 (store_key, title_key, on_year, on_month);
+
+insert into template_mo2 (store_key, title_key, on_year, on_month, sales_total)
+select smo.store_key, smo.title_key, imo.on_year, imo.on_month, sum(smo.sales)
+from issue_mo_2 imo, sales_mo smo
+where smo.issue_key = imo.issue_key
+and smo.sales >= 0
+group by smo.store_key, smo.title_key, imo.on_year, imo.on_month;
+
+
+desc template_mo2
+
+select count(*) from template_mo2
+
+
+select store_key, title_key, on_year, on_month, sales_total from template_vd2
+
+select * from store_vd where store_key = 22003

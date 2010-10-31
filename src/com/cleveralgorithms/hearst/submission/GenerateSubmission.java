@@ -97,7 +97,7 @@ public class GenerateSubmission
 			if (salesTotal == null) {
 				throw new RuntimeException("No data for line "+ i+ " " + line);
 			}
-			addLine(buf, lineParts[0], lineParts[1], lineParts[2], salesTotal);
+			addLine(buf, lineParts[0].trim(), lineParts[1].trim(), lineParts[2].trim(), salesTotal);
 			
 			if ((i%20000)==0) {
 	    		System.out.println(" "+i+" records");
@@ -135,13 +135,13 @@ public class GenerateSubmission
 	
 	protected void addLine(StringBuilder buf, String storeKey, String titleKey, String yearMonth, String salesTotal)
 	{
-		buf.append(storeKey.trim());
+		buf.append(storeKey);
 		buf.append(",");
-		buf.append(titleKey.trim());
+		buf.append(titleKey);
 		buf.append(",");
-		buf.append(yearMonth.trim());
+		buf.append(yearMonth);
 		buf.append(",");
-		buf.append(salesTotal.trim());
+		buf.append(salesTotal);
 		buf.append("\n");
 	}
 	

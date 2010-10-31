@@ -49,7 +49,7 @@ public class VehiclesAndSummarizedChainNNSales extends ImpTestNearestNeighbourSa
 			return Double.NaN;
 		} 
 		
-		return euclideanDistance(v1,v2);
+		return euclideanDistance(v1,v2,1);
 	}
 	
 	public static void main(String[] args) {

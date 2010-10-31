@@ -243,6 +243,8 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 	protected void writeTestSalesData() throws IOException
 	{
 		StringBuilder buf = new StringBuilder();
+		int count = 0;
+		int total = 0;
 		
 		// process all title/year/months in test
 		for(String key : testSales.keySet()) {
@@ -250,6 +252,7 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 			
 			// process all stores
 			for(Integer storeKey : salesData.keySet()) {
+				total++;
 				Double sales = salesData.get(storeKey);
 				
 				if (sales == null || sales.isNaN()) {
@@ -265,11 +268,12 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 				}
 				buf.append(sales.toString());
 				buf.append("\n");
+				count++;
 			}			
 		}
 		String filename = getOutputFilename();
 		FileIO.writeStringToFile(buf.toString(), new File(filename));
-		System.out.println("Successfully wrote file: " + filename);
+		System.out.println("Successfully wrote "+count+" of "+total+" records to file: " + filename);
 	}
 	
 	protected String getOutputFilename(){
