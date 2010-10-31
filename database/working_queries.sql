@@ -1056,4 +1056,4 @@ summarized_area_lvl_statistics_a, summarized_area_lvl_statistics_b, summarized_a
 summarized_area_lvl_statistics_e, summarized_area_lvl_statistics_f, summarized_area_lvl_statistics_g, summarized_area_lvl_statistics_h
 from store_mo;
 
-select * from store_mo where store_key = 59858;
+select * from store_vd where store_key = 26007;
