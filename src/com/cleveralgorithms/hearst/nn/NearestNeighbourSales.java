@@ -1,6 +1,5 @@
 package com.cleveralgorithms.hearst.nn;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,11 +11,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.cleveralgorithms.hearst.Utils;
+
 
 
 public abstract class NearestNeighbourSales 
 {
-	public final static int NUM_THREADS = 4;
+	public final static int NUM_THREADS = 2;
 	
 	public final static boolean SHOW_SKIPPED = true;
 	
@@ -54,8 +55,7 @@ public abstract class NearestNeighbourSales
 		normalizeVectors();
 	}
 	
-	
-	protected void normalizeVectors()
+	protected double [][] getMinmax()
 	{
 		double [][] minmax = null;
 		
@@ -85,39 +85,29 @@ public abstract class NearestNeighbourSales
 //			System.out.println(i+" = " + Arrays.toString(minmax[i]));
 //		}
 		
-		// normalize
+		return minmax;
+	}
+	
+	
+	protected void normalizeVectors()
+	{
+		double [][] minmax = getMinmax();
+		int [] ignore = normalizeIgnoreIndices();
+		
 		for(double [] v : trainStores.values())
 		{
-			for (int i = 0; i < v.length; i++) {
-				double range = minmax[i][1]-minmax[i][0];
-				if (range == 0) {
-					v[i] = 0;
-				} else {
-					v[i] = (v[i]-minmax[i][0]) / range;	
-				}
-				 
-				if(v[i]>1||v[i]<0) {
-					throw new RuntimeException("Normalization failed with: " + v[i]);
-				}
-			}
+			Utils.normalizeInPlace(minmax, ignore, v);
 		}
 		for(double [] v : testStores.values())
 		{
-			for (int i = 0; i < v.length; i++) {
-				double range = minmax[i][1]-minmax[i][0];
-				if (range == 0) {
-					v[i] = 0;
-				} else {
-					v[i] = (v[i]-minmax[i][0]) / range;	
-				}
-				 
-				if(v[i]>1||v[i]<0) {
-					throw new RuntimeException("Normalization failed with: " + v[i]);
-				}
-			}
+			Utils.normalizeInPlace(minmax, ignore,  v);
 		}
 	}
 	
+	protected int [] normalizeIgnoreIndices()
+	{
+		return new int[0];
+	}
 	
 	public void compute()
 	{
@@ -217,19 +207,8 @@ public abstract class NearestNeighbourSales
 	}
 	
 	public final static double euclideanDistance(double [] v1, double [] v2) {
-		return euclideanDistance(v1, v2, 0);
+		return Utils.euclideanDistance(v1, v2);
 	}
-	public final static double euclideanDistance(double [] v1, double [] v2, int off) {
-		// default to euclidean distance
-		double sum = 0;
-		for (int i = off; i < v2.length; i++) {
-			double diff = v1[i]-v2[i];
-			sum += diff*diff;
-		}
-		//return Math.sqrt(sum);
-		return sum;
-	}
-	
 	
 	public final static String toSalesKey(String titleKey, String yearKey, String monthKey)
 	{

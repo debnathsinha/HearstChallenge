@@ -3,9 +3,9 @@ package com.cleveralgorithms.hearst.nn.experiments.combinations;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.cleveralgorithms.hearst.Utils;
 import com.cleveralgorithms.hearst.nn.Configuration;
 import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales;
-import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales.OfflineConfiguration;
 
 public class VehiclesAndSummarizedChainNNSales extends ImpTestNearestNeighbourSales {
 
@@ -35,6 +35,14 @@ public class VehiclesAndSummarizedChainNNSales extends ImpTestNearestNeighbourSa
 		
 		return list;
 	}
+	
+	private final static int [] IGNORE_LIST = new int[]{0}; // ignore the chain
+	
+	protected int [] normalizeIgnoreIndices()
+	{
+		return IGNORE_LIST; 
+	}
+	
 
 	protected double calculateDistanceToStore(Integer trainStoreId, Integer testStoreId)
 	{
@@ -49,7 +57,7 @@ public class VehiclesAndSummarizedChainNNSales extends ImpTestNearestNeighbourSa
 			return Double.NaN;
 		} 
 		
-		return euclideanDistance(v1,v2,1);
+		return Utils.euclideanDistance(v1,v2,IGNORE_LIST);
 	}
 	
 	public static void main(String[] args) {
