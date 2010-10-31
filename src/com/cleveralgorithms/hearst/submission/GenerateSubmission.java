@@ -3,26 +3,50 @@ package com.cleveralgorithms.hearst.submission;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.cleveralgorithms.hearst.FileIO;
 
 public class GenerateSubmission 
 {
-
-	public final static String SOURCE_FILENAME = "dat/summarized_nn_sales_data.csv";
 	public final static String TEMPLATE_FILENAME = "data/template_for_submission.csv";	
-	public final static String OUTPUT_FILENAME = "submissions/summarized_nn_sales_data.csv";
+	
+	
+	public List<SalesModel> getSalesModels()
+	{
+		List<SalesModel> list = new LinkedList<SalesModel>();
+				
+		// model cascade
+		list.add(new NNModel(""));
+		list.add(new ChainTitleYearMonthModel());
+		list.add(new StoreTypeTitleYearMonthModel());
+		list.add(new WholesalerTitleYearMonthModel());
+		
+		// load 
+		for(SalesModel m : list) {
+			m.load();
+		}
+		
+		return list;
+	}
+	
+	protected String getOutputFilename()
+	{
+		return "submissions/submission"+System.currentTimeMillis()+".csv";
+	}
 	
 	
 	public void run() throws Exception
 	{		
-		// source
-		Map<String,String> salesMap = loadSourceData(SOURCE_FILENAME);
-		// template
-		String templateData = createOutputString(TEMPLATE_FILENAME, salesMap);		
+		// cascade
+		List<SalesModel> models = getSalesModels();
+		
+		// build template
+		String templateData = createOutputString(TEMPLATE_FILENAME, models);		
 		// write file
-		writeOutput(OUTPUT_FILENAME, templateData);
+		writeOutput(getOutputFilename(), templateData);
 		
 		System.out.println("done");
 	}
@@ -34,7 +58,7 @@ public class GenerateSubmission
 		System.out.println("Wrote file: " + filename);
 	}
 	
-	protected String createOutputString(String templateFilename, Map<String,String> salesMap)
+	protected String createOutputString(String templateFilename, List<SalesModel> list)
 		throws Exception
 	{
 		System.out.println("Processing template data " + templateFilename);
@@ -64,6 +88,27 @@ public class GenerateSubmission
 		return buf.toString();
 	}
 	
+	protected String getSalesString(List<SalesModel> list, String store, String title, String yearMonth)
+	{
+		String year = yearMonth.substring(0,4);
+		String month = yearMonth.substring(4);
+		
+		String sales = null;
+		
+		for(SalesModel m : list) {
+			sales = m.getSalesString(store, title, year, month);
+			if (sales != null) {
+				break;
+			}
+		}
+		
+		if (sales == null) {
+			throw new RuntimeException("Could not find sales data for record");
+		}
+		
+		return sales;
+	}
+	
 	protected void addLine(StringBuilder buf, String storeKey, String titleKey, String yearMonth, String salesTotal)
 	{
 		buf.append(storeKey.trim());
@@ -74,40 +119,6 @@ public class GenerateSubmission
 		buf.append(",");
 		buf.append(salesTotal.trim());
 		buf.append("\n");
-	}
-	
-	protected Map<String,String> loadSourceData(String filename) throws IOException
-	{
-		System.out.println("Loading source data " + filename);
-		Map<String,String> map = new HashMap<String,String>();
-		
-		String salesData = FileIO.fastLoadFileAsString(new File(filename));
-		String [] lines = salesData.split("\n");
-		for(String line : lines)
-		{			
-			String [] lineParts = line.split(",");
-			if (lineParts.length != 5) {
-				throw new RuntimeException("Bad line: " + line);
-			}
-			String key = toSalesKey(lineParts[0], lineParts[1], lineParts[2], lineParts[3]);
-			String value = lineParts[4];
-			map.put(key, value);
-		}
-		return map;
-	}
-	
-	public final static String toSalesKey(String storeKey, String titleKey, String yearKey, String monthKey)
-	{
-		return Integer.parseInt(storeKey) +"-"+
-			   Integer.parseInt(titleKey)+"-"+
-			   Integer.parseInt(yearKey)+"-"+
-			   Integer.parseInt(monthKey);
-	}
-	public final static String toSalesKey(String storeKey, String titleKey, String yearMonth)
-	{
-		String year = yearMonth.substring(0,4);
-		String month = yearMonth.substring(4);
-		return toSalesKey(storeKey, titleKey, year, month);
 	}
 	
 	public static void main(String[] args) throws Exception 

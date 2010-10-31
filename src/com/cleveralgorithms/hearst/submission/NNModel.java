@@ -18,7 +18,7 @@ public class NNModel implements SalesModel
 		this.filename = filename;
 	}
 
-	protected void load()
+	public void load()
 	{
 		String salesData = null;		
 		try {
