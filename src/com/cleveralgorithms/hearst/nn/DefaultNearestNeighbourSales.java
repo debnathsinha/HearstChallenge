@@ -17,6 +17,8 @@ public abstract class DefaultNearestNeighbourSales extends NearestNeighbourSales
 		// sales
 		int total = loadSalesDataFromDatabase(trainSales, prepareTrainSalesQuery());
 		System.out.println(">Loaded "+total + " TRAIN sales records from the database.");
+		// ensure we have no predictions (null's become zeros)
+		clearPredictions();
 		
 		// stores
 		total = loadSoresDataFromDatabase(trainStores, getTrainStoresQuery());
@@ -67,7 +69,7 @@ public abstract class DefaultNearestNeighbourSales extends NearestNeighbourSales
 					value = new HashMap<Integer,Double>();
 					sales.put(key, value);
 				}
-				// map store to sales info against key
+				// map store to sales info against key				
 				value.put(storeKey, salesTotal);
 				total++;
 			} 

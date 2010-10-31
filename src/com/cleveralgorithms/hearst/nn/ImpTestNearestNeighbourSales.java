@@ -109,16 +109,7 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 
 	}
 	
-	public void clearPredictions()
-	{
-		for(String key : testSales.keySet())
-		{
-			Map<Integer,Double> testSalesData = testSales.get(key);
-			for(Integer storeKey : testSalesData.keySet()) {
-				testSalesData.put(storeKey, Double.NaN);
-			}
-		}
-	}
+
 	
 	protected void preRunFinalization()
 	{

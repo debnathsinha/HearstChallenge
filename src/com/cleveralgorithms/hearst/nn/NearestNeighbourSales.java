@@ -19,7 +19,7 @@ public abstract class NearestNeighbourSales
 {
 	public final static int NUM_THREADS = 2;
 	
-	public final static boolean SHOW_SKIPPED = true;
+	public final static boolean SHOW_SKIPPED = false;
 	
 	// training records
 	protected Map<Integer,double[]> trainStores = new HashMap<Integer, double[]>();
@@ -59,26 +59,14 @@ public abstract class NearestNeighbourSales
 	{
 		double [][] minmax = null;
 		
-		// bounds
 		for(double [] v : trainStores.values())
 		{
-			if (minmax == null) {
-				minmax = new double[v.length][];
-				for (int i = 0; i < minmax.length; i++) {
-					minmax[i] = new double[]{Double.MAX_VALUE, Double.MIN_VALUE};
-				}
-			}
-			for (int i = 0; i < v.length; i++) {
-				if (v[i]<minmax[i][0]){minmax[i][0] = v[i];}
-				if (v[i]>minmax[i][1]){minmax[i][1] = v[i];}
-			}
+			if (minmax == null) { minmax = Utils.createMinmax(v.length);}
+			Utils.updateMinmax(minmax, v);
 		}
 		for(double [] v : testStores.values())
 		{
-			for (int i = 0; i < v.length; i++) {
-				if (v[i]<minmax[i][0]){minmax[i][0] = v[i];}
-				if (v[i]>minmax[i][1]){minmax[i][1] = v[i];}
-			}
+			Utils.updateMinmax(minmax, v);
 		}
 		
 //		for (int i = 0; i < minmax.length; i++) {
@@ -145,13 +133,22 @@ public abstract class NearestNeighbourSales
 	
 	protected void calculateSalesForKey(String testSalesKey, Integer testStoreKey) 
 	{
-		// get all candidate train stores
+		// get all candidate train stores for test key
 		Map<Integer,Double> trainSalesData = trainSales.get(testSalesKey);
+		if (trainSalesData == null) 
+		{
+			if (SHOW_SKIPPED) {
+				System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no key match");
+			}
+			testSales.get(testSalesKey).put(testStoreKey, Double.NaN);
+			return;
+		}
 		Collection<Integer> candidateStoresKeys = trainSalesData.keySet();
 		if (candidateStoresKeys.isEmpty()) {
 			if (SHOW_SKIPPED) {
 				System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no base records");
 			}
+			testSales.get(testSalesKey).put(testStoreKey, Double.NaN);
 			return;
 		}
 		
@@ -166,8 +163,9 @@ public abstract class NearestNeighbourSales
 		}		
 		if (candidateStores.isEmpty()) {
 			if (SHOW_SKIPPED) {
-				System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no candidates were considered (NaN distance)");
+				System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no candidates were considered (all NaN distances)");
 			}
+			testSales.get(testSalesKey).put(testStoreKey, Double.NaN);
 			return;
 		}
 		
@@ -214,11 +212,17 @@ public abstract class NearestNeighbourSales
 	{
 		return titleKey+"-"+yearKey+"-"+monthKey;
 	}
-	
-	protected void configure(Configuration cfg) 
+	public void clearPredictions()
 	{
-		
+		for(String key : testSales.keySet())
+		{
+			Map<Integer,Double> testSalesData = testSales.get(key);
+			for(Integer storeKey : testSalesData.keySet()) {
+				testSalesData.put(storeKey, Double.NaN);
+			}
+		}
 	}
+
 
 	protected void preRunFinalization(){}
 	

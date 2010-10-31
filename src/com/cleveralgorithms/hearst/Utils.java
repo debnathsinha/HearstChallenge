@@ -2,6 +2,29 @@ package com.cleveralgorithms.hearst;
 
 public class Utils
 {
+	public final static void updateMinmax(double [][] minmax, double [] v)
+	{
+		for (int i = 0; i < v.length; i++) {
+			// min
+			if (v[i] < minmax[i][0]){
+				minmax[i][0] = v[i];
+			}
+			// max
+			if (v[i] > minmax[i][1]){
+				minmax[i][1] = v[i];
+			}
+		}
+	}
+	
+	public final static double [][] createMinmax(int length)
+	{
+		double [][] minmax = new double[length][];
+		for (int i = 0; i < minmax.length; i++) {
+			minmax[i] = new double[]{Double.MAX_VALUE, Double.MIN_VALUE};
+		}
+		return minmax;
+	}
+	
 	public final static double normalize(double min, double max, double value)
 	{
 		double range = max - min;
