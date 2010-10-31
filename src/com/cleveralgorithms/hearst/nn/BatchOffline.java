@@ -71,13 +71,13 @@ public class BatchOffline {
 //		list.add(new VehiclesChainNNSales());
 		
 		// combinations
-		list.add(new MvhAndEduStatusChainNNSales());
-		list.add(new MvhStatusAndVehiclesChainNNSales());
-		list.add(new SummarizedAndEduChainNNSales());
-		list.add(new SummarizedAndMhvChainNNSales());
-		list.add(new VehiclesAndEducationChainNNSales());
+//		list.add(new MvhAndEduStatusChainNNSales());
+//		list.add(new MvhStatusAndVehiclesChainNNSales());
+//		list.add(new SummarizedAndEduChainNNSales());
+//		list.add(new SummarizedAndMhvChainNNSales());
+//		list.add(new VehiclesAndEducationChainNNSales());
 		list.add(new VehiclesAndSummarizedChainNNSales());
-		list.add(new MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales()); // all 4
+//		list.add(new MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales()); // all 4
 		
 		return list;
 	}
