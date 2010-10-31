@@ -401,7 +401,77 @@ Bounded by chain information:
 | VehiclesChainNNSales[k=1000] | 98.175% | 21.052|
 
 
+h3. Combinations
 
+Model: MvhAndEduStatusChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| MvhAndEduStatusChainNNSales[k=1] | 98.32% | 24.015|
+| MvhAndEduStatusChainNNSales[k=3] | 98.32% | 21.889|
+| MvhAndEduStatusChainNNSales[k=5] | 98.32% | 21.008|
+| MvhAndEduStatusChainNNSales[k=7] | 98.32% | 20.969|
+| MvhAndEduStatusChainNNSales[k=10] | 98.32% | 21.254|
+| MvhAndEduStatusChainNNSales[k=15] | 98.32% | 21.803|
+
+Model: MvhStatusAndVehiclesChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| MvhStatusAndVehiclesChainNNSales[k=1] | 98.175% | 23.896|
+| MvhStatusAndVehiclesChainNNSales[k=3] | 98.175% | 20.89|
+| MvhStatusAndVehiclesChainNNSales[k=5] | 98.175% | 21.061|
+| MvhStatusAndVehiclesChainNNSales[k=7] | 98.175% | 21.19|
+| MvhStatusAndVehiclesChainNNSales[k=10] | 98.175% | 21.23|
+| MvhStatusAndVehiclesChainNNSales[k=15] | 98.175% | 21.187|
+
+Model: SummarizedAndEduChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| SummarizedAndEduChainNNSales[k=1] | 98.3% | 23.942|
+| SummarizedAndEduChainNNSales[k=3] | 98.3% | 21.117|
+| SummarizedAndEduChainNNSales[k=5] | 98.3% | 20.43|
+| SummarizedAndEduChainNNSales[k=7] | 98.3% | 20.402|
+| SummarizedAndEduChainNNSales[k=10] | 98.3% | 21.64|
+| SummarizedAndEduChainNNSales[k=15] | 98.3% | 21.829|
+
+Model: SummarizedAndMhvChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| SummarizedAndMhvChainNNSales[k=1] | 98.3% | 24.099|
+| SummarizedAndMhvChainNNSales[k=3] | 98.3% | 21.148|
+| SummarizedAndMhvChainNNSales[k=5] | 98.3% | 20.453|
+| SummarizedAndMhvChainNNSales[k=7] | 98.3% | 20.38|
+| SummarizedAndMhvChainNNSales[k=10] | 98.3% | 21.577|
+| SummarizedAndMhvChainNNSales[k=15] | 98.3% | 21.666|
+
+Model: VehiclesAndEducationChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| VehiclesAndEducationChainNNSales[k=1] | 98.175% | 24.121|
+| VehiclesAndEducationChainNNSales[k=3] | 98.175% | 21.175|
+| VehiclesAndEducationChainNNSales[k=5] | 98.175% | 21.185|
+| VehiclesAndEducationChainNNSales[k=7] | 98.175% | 21.165|
+| VehiclesAndEducationChainNNSales[k=10] | 98.175% | 21.237|
+| VehiclesAndEducationChainNNSales[k=15] | 98.175% | 21.207|
+
+Model: VehiclesAndSummarizedChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| VehiclesAndSummarizedChainNNSales[k=1] | 98.175% | 23.366|
+| VehiclesAndSummarizedChainNNSales[k=3] | 98.175% | 20.822|
+| VehiclesAndSummarizedChainNNSales[k=5] | 98.175% | 20.386|
+| VehiclesAndSummarizedChainNNSales[k=7] | 98.175% | 20.175|
+| VehiclesAndSummarizedChainNNSales[k=10] | 98.175% | 20.174|
+| VehiclesAndSummarizedChainNNSales[k=15] | 98.175% | 20.325|
+
+Model: MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales
+
+|_. Model |_. Coverage |_. RMSE |
+| MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=1] | 98.175% | 23.29|
+| MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=3] | 98.175% | 20.437|
+| MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=5] | 98.175% | 20.343|
+| MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=7] | 98.175% | 20.174|
+| MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=10] | 98.175% | 20.34|
+| MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=15] | 98.175% | 20.493|
 
 
 

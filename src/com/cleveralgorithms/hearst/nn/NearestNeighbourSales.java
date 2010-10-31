@@ -1,5 +1,6 @@
 package com.cleveralgorithms.hearst.nn;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,7 +50,74 @@ public abstract class NearestNeighbourSales
 		}
 		
 		preRunFinalization();
+		
+		normalizeVectors();
 	}
+	
+	
+	protected void normalizeVectors()
+	{
+		double [][] minmax = null;
+		
+		// bounds
+		for(double [] v : trainStores.values())
+		{
+			if (minmax == null) {
+				minmax = new double[v.length][];
+				for (int i = 0; i < minmax.length; i++) {
+					minmax[i] = new double[]{Double.MAX_VALUE, Double.MIN_VALUE};
+				}
+			}
+			for (int i = 0; i < v.length; i++) {
+				if (v[i]<minmax[i][0]){minmax[i][0] = v[i];}
+				if (v[i]>minmax[i][1]){minmax[i][1] = v[i];}
+			}
+		}
+		for(double [] v : testStores.values())
+		{
+			for (int i = 0; i < v.length; i++) {
+				if (v[i]<minmax[i][0]){minmax[i][0] = v[i];}
+				if (v[i]>minmax[i][1]){minmax[i][1] = v[i];}
+			}
+		}
+		
+//		for (int i = 0; i < minmax.length; i++) {
+//			System.out.println(i+" = " + Arrays.toString(minmax[i]));
+//		}
+		
+		// normalize
+		for(double [] v : trainStores.values())
+		{
+			for (int i = 0; i < v.length; i++) {
+				double range = minmax[i][1]-minmax[i][0];
+				if (range == 0) {
+					v[i] = 0;
+				} else {
+					v[i] = (v[i]-minmax[i][0]) / range;	
+				}
+				 
+				if(v[i]>1||v[i]<0) {
+					throw new RuntimeException("Normalization failed with: " + v[i]);
+				}
+			}
+		}
+		for(double [] v : testStores.values())
+		{
+			for (int i = 0; i < v.length; i++) {
+				double range = minmax[i][1]-minmax[i][0];
+				if (range == 0) {
+					v[i] = 0;
+				} else {
+					v[i] = (v[i]-minmax[i][0]) / range;	
+				}
+				 
+				if(v[i]>1||v[i]<0) {
+					throw new RuntimeException("Normalization failed with: " + v[i]);
+				}
+			}
+		}
+	}
+	
 	
 	public void compute()
 	{

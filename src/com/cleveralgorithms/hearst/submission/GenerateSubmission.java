@@ -49,14 +49,26 @@ public class GenerateSubmission
 		// write file
 		writeOutput(getOutputFilename(), templateData);
 		
-		System.out.println();
-		for(String key : counts.keySet())
-		{
-			System.out.println(key+" totals: " + counts.get(key));
-		}
-		System.out.println();
+		printTotals();
 		
 		System.out.println("done");
+	}
+	
+	protected void printTotals()
+	{
+		// sum
+		long sum = 0;
+		for(String key : counts.keySet()) {
+			sum += counts.get(key).value;
+		}
+		
+		System.out.println();
+		for(String key : counts.keySet()) {
+			long value = counts.get(key).value;
+			double coverage = ((double)value/(double)sum)*100.0;
+			System.out.println(key+" total: " + value + " ("+coverage+"%)");
+		}
+		System.out.println();
 	}
 	
 	protected void writeOutput(String filename, String data)
