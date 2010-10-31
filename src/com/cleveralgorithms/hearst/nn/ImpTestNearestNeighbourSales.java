@@ -216,7 +216,7 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 	protected String getSubmissionSalesQuery()
 	{
 		// a fixed random sample of mo records
-		return "select store_key, title_key, on_year, on_month, sales_total from template_vd";
+		return "select store_key, title_key, on_year, on_month, sales_total from template_vd2";
 	}
 
 	
@@ -273,7 +273,7 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 	}
 	
 	protected String getOutputFilename(){
-		return "dat/"+this.toString()+"nn_sales_data.dat";
+		return "dat/"+getClass().getSimpleName()+"_nn_sales_data.dat";
 	}
 
 	public boolean isTestMode() {

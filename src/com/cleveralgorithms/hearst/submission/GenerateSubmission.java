@@ -20,7 +20,7 @@ public class GenerateSubmission
 		List<SalesModel> list = new LinkedList<SalesModel>();
 				
 		// model cascade
-		list.add(new NNModel(""));
+		list.add(new NNModel("dat/VehiclesAndSummarizedChainNNSales_nn_sales_data.dat"));
 		list.add(new ChainTitleYearMonthModel());
 		list.add(new StoreTypeTitleYearMonthModel());
 		list.add(new WholesalerTitleYearMonthModel());
