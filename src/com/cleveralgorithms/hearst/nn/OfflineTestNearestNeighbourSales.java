@@ -104,7 +104,8 @@ public abstract class OfflineTestNearestNeighbourSales extends DefaultNearestNei
 	
 	protected String getTestSalesQuery()
 	{
-		return "select store_key, title_key, on_year, on_month, sales_total from template_mo where on_year = 2009 order by rand() limit 20000";
+		// a fixed random sample of mo records
+		return "select store_key, title_key, on_year, on_month, sales_total from template_mo where on_year = 2009 order by rand(1) limit 20000";
 	}
 }
 

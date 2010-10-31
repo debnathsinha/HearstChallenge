@@ -14,7 +14,7 @@ public class ChainNNSales extends OfflineTestNearestNeighbourSales {
 		return Integer.MAX_VALUE;
 	}
 	
-	public double calculateDistanceToStore(Integer trainStoreId, Integer testStoreId)
+	protected double calculateDistanceToStore(Integer trainStoreId, Integer testStoreId)
 	{
 		double [] v1 = trainStores.get(trainStoreId);
 		double [] v2 = testStores.get(testStoreId);

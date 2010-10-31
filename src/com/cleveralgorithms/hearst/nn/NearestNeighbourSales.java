@@ -100,23 +100,31 @@ public abstract class NearestNeighbourSales
 			System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no candidates were considered (NaN distance)");
 			return;
 		}
-		// select the best k stores
-		Collections.sort(candidateStores);		
-		// calculate the average sales
-		double sales = 0.0;
-		int count = 0;
-		for (int i = 0; i < candidateStores.size() && i<getKNeighbours(); i++, count++) {
-			Store candidate = candidateStores.get(i);
-			Integer storeKey = candidate.trainStoreId;
-			sales += trainSalesData.get(storeKey).doubleValue();
-		}
-		// average
-		sales /= (double)count;		
+		
+		// predict sales
+		double sales = predictSales(testSalesKey, candidateStores);
 		// assign to test record		
 		testSales.get(testSalesKey).put(testStoreKey, new Double(sales));
 	}
 	
-	public double calculateDistanceToStore(Integer trainStoreId, Integer testStoreId)
+	protected double predictSales(String testSalesKey, List<Store> candidateStores) {
+		// oder stores by distance to store
+		Collections.sort(candidateStores);	
+		
+		// calculate the average sales
+		double sales = 0.0;
+		int count = 0;
+		
+		for (int i = 0; i < candidateStores.size() && i<getKNeighbours(); i++, count++) {
+			Store candidate = candidateStores.get(i);
+			Integer storeKey = candidate.trainStoreId;
+			sales += trainSales.get(testSalesKey).get(storeKey).doubleValue();
+		}
+		// average
+		return (sales / (double)count);
+	}
+	
+	protected double calculateDistanceToStore(Integer trainStoreId, Integer testStoreId)
 	{
 		double [] v1 = trainStores.get(trainStoreId);
 		double [] v2 = testStores.get(testStoreId);
@@ -125,6 +133,10 @@ public abstract class NearestNeighbourSales
 			return Double.NaN;
 		}
 		
+		return euclideanDistance(v1,v2);
+	}
+	
+	public final static double euclideanDistance(double [] v1, double [] v2) {
 		// default to euclidean distance
 		double sum = 0;
 		for (int i = 0; i < v2.length; i++) {
@@ -134,6 +146,7 @@ public abstract class NearestNeighbourSales
 		//return Math.sqrt(sum);
 		return sum;
 	}
+	
 	
 	public final static String toSalesKey(String titleKey, String yearKey, String monthKey)
 	{
