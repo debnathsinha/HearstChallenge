@@ -17,6 +17,8 @@ public abstract class NearestNeighbourSales
 {
 	public final static int NUM_THREADS = 4;
 	
+	public final static boolean SHOW_SKIPPED = false;
+	
 	// training records
 	protected Map<Integer,double[]> trainStores = new HashMap<Integer, double[]>();
 	protected Map<String, Map<Integer,Double>> trainSales = new HashMap<String, Map<Integer,Double>>();
@@ -30,10 +32,14 @@ public abstract class NearestNeighbourSales
 	public NearestNeighbourSales()
 	{	}
 	
-	public void compute()
-	{
-		startTime = System.currentTimeMillis();
-		
+	public void run() {
+		loadData();
+		compute();
+		postComputation();
+		System.out.println("done");
+	}
+	
+	public void loadData() {
 		System.out.println("Loading data...");
 		try {
 			loadTrainingData();
@@ -41,6 +47,13 @@ public abstract class NearestNeighbourSales
 		} catch(Exception e) {
 			throw new RuntimeException("Fatal exception loading data: " + e.getMessage(), e);
 		}
+		
+		preRunFinalization();
+	}
+	
+	public void compute()
+	{
+		startTime = System.currentTimeMillis();
 		
 		// prepare the thread pool
 		BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();		
@@ -53,7 +66,7 @@ public abstract class NearestNeighbourSales
 			}			
 		}
 		pool.shutdown();
-		System.out.println("> queue is fully loaded and has "+queue.size()+" elements remaining");
+//		System.out.println("> queue is fully loaded and has "+queue.size()+" elements remaining");
 		while (!queue.isEmpty()) {
 			try {
 				while (!pool.awaitTermination(1, TimeUnit.MINUTES)) {
@@ -63,12 +76,7 @@ public abstract class NearestNeighbourSales
 				e.printStackTrace();
 			}
 		}
-		System.out.println("> queue has "+queue.size()+" elements remaining");
-		
-		// do something with the data
-		postComputation();
-		
-		System.out.println("done");
+//		System.out.println("> queue has "+queue.size()+" elements remaining");
 		
 		endTime = System.currentTimeMillis();		
 		long seconds = (endTime-startTime)/1000;
@@ -83,7 +91,9 @@ public abstract class NearestNeighbourSales
 		Map<Integer,Double> trainSalesData = trainSales.get(testSalesKey);
 		Collection<Integer> candidateStoresKeys = trainSalesData.keySet();
 		if (candidateStoresKeys.isEmpty()) {
-			System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no base records");
+			if (SHOW_SKIPPED) {
+				System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no base records");
+			}
 			return;
 		}
 		
@@ -97,7 +107,9 @@ public abstract class NearestNeighbourSales
 			candidateStores.add(new Store(trainStoreKey, distance));
 		}		
 		if (candidateStores.isEmpty()) {
-			System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no candidates were considered (NaN distance)");
+			if (SHOW_SKIPPED) {
+				System.out.println(" skipping [key="+testSalesKey+", store="+testStoreKey+"], no candidates were considered (NaN distance)");
+			}
 			return;
 		}
 		
@@ -153,7 +165,12 @@ public abstract class NearestNeighbourSales
 		return titleKey+"-"+yearKey+"-"+monthKey;
 	}
 	
+	protected void configure(Configuration cfg) 
+	{
+		
+	}
 
+	protected void preRunFinalization(){}
 	
 	protected abstract void postComputation();
 	

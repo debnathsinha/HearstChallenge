@@ -13,6 +13,7 @@ public class DbIO
 	public final static String DB_USERNAME = "root";
 	public final static String DB_PASSWORD = "";
 	
+	public final static boolean SHOW_QUERIES = false;
 	
 	public static Connection getConnection() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException
 	{
@@ -23,7 +24,9 @@ public class DbIO
 	
 	public static ResultSet executeReadOnlyQuery(Connection conn, String query) throws SQLException
 	{
-		System.out.println(" sql: "+query);
+		if (SHOW_QUERIES) {
+			System.out.println(" sql: "+query);	
+		}		
 		
 		Statement statement = conn.createStatement();
 		statement.setFetchSize(1000);	
