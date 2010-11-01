@@ -35,7 +35,9 @@ The following table of results considers pseudo random neighbourhoods of stores 
 
 The results show that averaging against all stores with the same chain provides the best results.
 
-h3. Age Statistics
+The following series of results investigate the predictive capability of different subsets of the the store attributes bounded by matching on the same chain.
+
+h4. Age Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | AgeChainNNSales[k=1] | 98.32% | 24.968|
@@ -46,7 +48,7 @@ h3. Age Statistics
 | AgeChainNNSales[k=15] | 98.32% | 22.005|
 | AgeChainNNSales[k=20] | 98.32% | 21.569|
 
-h3. Dwelling Size Statistics
+h4. Dwelling Size Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | DwellingSizeChainNNSales[k=1] | 98.32% | 25.592|
@@ -57,7 +59,7 @@ h3. Dwelling Size Statistics
 | DwellingSizeChainNNSales[k=15] | 98.32% | 21.944|
 | DwellingSizeChainNNSales[k=20] | 98.32% | 21.536|
 
-h3. Dwelling Type Statistics
+h4. Dwelling Type Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | DwellingTypeChainNNSales[k=1] | 98.32% | 25.617|
@@ -68,7 +70,7 @@ h3. Dwelling Type Statistics
 | DwellingTypeChainNNSales[k=15] | 98.32% | 21.741|
 | DwellingTypeChainNNSales[k=20] | 98.32% | 21.547|
 
-h3. Education Statistics
+h4. Education Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | EducationChainNNSales[k=1] | 98.32% | 25.526|
@@ -79,7 +81,7 @@ h3. Education Statistics
 | EducationChainNNSales[k=15] | 98.32% | 21.858|
 | EducationChainNNSales[k=20] | 98.32% | 21.505|
 
-h3. Gender Statistics
+h4. Gender Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | GenderChainNNSales[k=1] | 98.32% | 25.826|
@@ -90,7 +92,7 @@ h3. Gender Statistics
 | GenderChainNNSales[k=15] | 98.32% | 22.091|
 | GenderChainNNSales[k=20] | 98.32% | 21.589|
 
-h3. Homeowner Statistics
+h4. Homeowner Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | HomeownerChainNNSales[k=1] | 98.32% | 24.878|
@@ -101,7 +103,7 @@ h3. Homeowner Statistics
 | HomeownerChainNNSales[k=15] | 98.32% | 21.985|
 | HomeownerChainNNSales[k=20] | 98.32% | 21.519|
 
-h3. Household Status Statistics
+h4. Household Status Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | HouseholdChainStatusNNSales[k=1] | 98.32% | 25.672|
@@ -112,7 +114,7 @@ h3. Household Status Statistics
 | HouseholdChainStatusNNSales[k=15] | 98.32% | 21.955|
 | HouseholdChainStatusNNSales[k=20] | 98.32% | 21.545|
 
-h3. Income Statistics
+h4. Income Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | IncomeChainNNSales[k=1] | 98.32% | 24.757|
@@ -123,7 +125,7 @@ h3. Income Statistics
 | IncomeChainNNSales[k=15] | 98.32% | 21.961|
 | IncomeChainNNSales[k=20] | 98.32% | 21.544|
 
-h3. Marital Status Statistics
+h4. Marital Status Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | MaritalStatusChainNNSales[k=1] | 98.32% | 25.033|
@@ -134,7 +136,7 @@ h3. Marital Status Statistics
 | MaritalStatusChainNNSales[k=15] | 98.32% | 22.014|
 | MaritalStatusChainNNSales[k=20] | 98.32% | 21.559|
 
-h3. Mvh Statistics
+h4. Mvh Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | MvhStatusChainNNSales[k=1] | 98.32% | 24.452|
@@ -145,7 +147,7 @@ h3. Mvh Statistics
 | MvhStatusChainNNSales[k=15] | 98.32% | 21.984|
 | MvhStatusChainNNSales[k=20] | 98.32% | 21.624|
 
-h3. Occupation Statistics
+h4. Occupation Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | OccupationChainNNSales[k=1] | 98.32% | 24.543|
@@ -156,7 +158,7 @@ h3. Occupation Statistics
 | OccupationChainNNSales[k=15] | 98.32% | 21.83|
 | OccupationChainNNSales[k=20] | 98.32% | 21.43|
 
-h3. Residence Statistics
+h4. Residence Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | ResidenceChainNNSales[k=1] | 98.32% | 25.742|
@@ -167,7 +169,7 @@ h3. Residence Statistics
 | ResidenceChainNNSales[k=15] | 98.32% | 22.071|
 | ResidenceChainNNSales[k=20] | 98.32% | 21.598|
 
-h3. Size Statistics
+h4. Size Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | SizeChainNNSales[k=1] | 98.32% | 25.569|
@@ -178,7 +180,7 @@ h3. Size Statistics
 | SizeChainNNSales[k=15] | 98.32% | 22.215|
 | SizeChainNNSales[k=20] | 98.32% | 21.684|
 
-h3. Summarized Area Level Statistics
+h4. Summarized Area Level Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | SummarizedChainNNSales[k=1] | 98.535% | 23.632|
@@ -189,7 +191,7 @@ h3. Summarized Area Level Statistics
 | SummarizedChainNNSales[k=15] | 98.535% | 21.317|
 | SummarizedChainNNSales[k=20] | 98.535% | 21.318|
 
-h3. Vehicles Statistics
+h4. Vehicles Statistics
 
 |_. Model |_. Coverage |_. RMSE |
 | VehiclesChainNNSales[k=1] | 98.175% | 23.755|
