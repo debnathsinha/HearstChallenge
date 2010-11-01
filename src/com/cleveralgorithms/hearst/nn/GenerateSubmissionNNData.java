@@ -1,15 +1,19 @@
 package com.cleveralgorithms.hearst.nn;
 
 import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales.OfflineConfiguration;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.chain.VehiclesAndSummarizedChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.SummarizedAndMhvStoretypeNNSales;
 
 
 public class GenerateSubmissionNNData {
 
 	public ImpTestNearestNeighbourSales getModel()
 	{
-		VehiclesAndSummarizedChainNNSales s = new VehiclesAndSummarizedChainNNSales();
-		s.setConfiguration(new OfflineConfiguration(10));
+//		ImpTestNearestNeighbourSales s = new VehiclesAndSummarizedChainNNSales();
+//		s.setConfiguration(new OfflineConfiguration(10));
+		
+		ImpTestNearestNeighbourSales s = new SummarizedAndMhvStoretypeNNSales();
+		s.setConfiguration(new OfflineConfiguration(7));
+		
 		return s;
 	}
 

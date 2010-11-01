@@ -22,6 +22,7 @@ public class GenerateSubmission
 		// model cascade
 		list.add(new NNModel("dat/VehiclesAndSummarizedChainNNSales_nn_sales_data.dat"));
 		list.add(new ChainTitleYearMonthModel());
+		list.add(new NNModel("dat/SummarizedAndMhvStoretypeNNSales_nn_sales_data.dat"));
 		list.add(new StoreTypeTitleYearMonthModel());
 		list.add(new WholesalerTitleYearMonthModel());
 		
@@ -118,7 +119,7 @@ public class GenerateSubmission
 		for(SalesModel m : list) {
 			sales = m.getSalesString(store, title, year, month);
 			if (sales != null) {
-				String key = m.getClass().getSimpleName();
+				String key = m.getName();
 				MutableInteger count = counts.get(key);
 				if (count == null) {
 					count = new MutableInteger(); 

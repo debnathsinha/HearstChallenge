@@ -18,6 +18,11 @@ public class NNModel implements SalesModel
 		this.filename = filename;
 	}
 
+	public String getName()
+	{
+		return "NN-"+filename;
+	}
+	
 	public void load()
 	{
 		String salesData = null;		

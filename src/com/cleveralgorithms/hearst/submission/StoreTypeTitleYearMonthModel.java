@@ -15,6 +15,11 @@ public class StoreTypeTitleYearMonthModel implements SalesModel
 	public StoreTypeTitleYearMonthModel()
 	{}
 	
+	public String getName()
+	{
+		return this.getClass().getSimpleName();
+	}
+	
 	public void load(){
 		try {
 			loadStoreChains();	

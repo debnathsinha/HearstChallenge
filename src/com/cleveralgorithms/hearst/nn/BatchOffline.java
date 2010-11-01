@@ -10,21 +10,13 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales.OfflineConfiguration;
-import com.cleveralgorithms.hearst.nn.experiments.age.AgeStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.dwelling.DwellingSizeStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.dwelling.DwellingTypeStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.education.EducationStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.gender.GenderStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.homeowner.HomeownerStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.household.HouseholdStoretypeStatusNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.income.IncomeStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.maritalstatus.MaritalStatusStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.mvh.MvhStatusStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.occupation.OccupationStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.residence.ResidenceStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.size.SizeStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.summarized.SummarizedStoretypeNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.vehicles.VehiclesStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.MvhAndEduAndSummarizedAndVehiclesStatusStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.MvhAndEduStatusStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.MvhStatusAndVehiclesStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.SummarizedAndEduStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.SummarizedAndMhvStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.VehiclesAndEducationStoretypeNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.storetype.VehiclesAndSummarizedStoretypeNNSales;
 
 
 
@@ -94,21 +86,30 @@ public class BatchOffline {
 //		list.add(new BigComboChain3());
 		
 		// linear + store type
-		list.add(new AgeStoretypeNNSales());
-		list.add(new DwellingSizeStoretypeNNSales());
-		list.add(new DwellingTypeStoretypeNNSales());
-		list.add(new EducationStoretypeNNSales());
-		list.add(new GenderStoretypeNNSales());
-		list.add(new HomeownerStoretypeNNSales());
-		list.add(new HouseholdStoretypeStatusNNSales());
-		list.add(new IncomeStoretypeNNSales());
-		list.add(new MaritalStatusStoretypeNNSales());
-		list.add(new MvhStatusStoretypeNNSales());
-		list.add(new OccupationStoretypeNNSales());
-		list.add(new ResidenceStoretypeNNSales());
-		list.add(new SizeStoretypeNNSales());
-		list.add(new SummarizedStoretypeNNSales());
-		list.add(new VehiclesStoretypeNNSales());
+//		list.add(new AgeStoretypeNNSales());
+//		list.add(new DwellingSizeStoretypeNNSales());
+//		list.add(new DwellingTypeStoretypeNNSales());
+//		list.add(new EducationStoretypeNNSales());
+//		list.add(new GenderStoretypeNNSales());
+//		list.add(new HomeownerStoretypeNNSales());
+//		list.add(new HouseholdStoretypeStatusNNSales());
+//		list.add(new IncomeStoretypeNNSales());
+//		list.add(new MaritalStatusStoretypeNNSales());
+//		list.add(new MvhStatusStoretypeNNSales());
+//		list.add(new OccupationStoretypeNNSales());
+//		list.add(new ResidenceStoretypeNNSales());
+//		list.add(new SizeStoretypeNNSales());
+//		list.add(new SummarizedStoretypeNNSales());
+//		list.add(new VehiclesStoretypeNNSales());
+		
+		// storetype combinations
+		list.add(new MvhAndEduStatusStoretypeNNSales());
+		list.add(new MvhStatusAndVehiclesStoretypeNNSales());
+		list.add(new SummarizedAndEduStoretypeNNSales());
+		list.add(new SummarizedAndMhvStoretypeNNSales());
+		list.add(new VehiclesAndEducationStoretypeNNSales());
+		list.add(new VehiclesAndSummarizedStoretypeNNSales());
+		list.add(new MvhAndEduAndSummarizedAndVehiclesStatusStoretypeNNSales()); // all 4
 		
 		return list;
 	}
