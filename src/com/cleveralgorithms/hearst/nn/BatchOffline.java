@@ -10,13 +10,21 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales.OfflineConfiguration;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.MvhAndEduStatusChainNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.MvhStatusAndVehiclesChainNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.SummarizedAndEduChainNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.SummarizedAndMhvChainNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.VehiclesAndEducationChainNNSales;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.VehiclesAndSummarizedChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.age.AgeChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.dwelling.DwellingSizeChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.dwelling.DwellingTypeChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.education.EducationChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.gender.GenderChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.homeowner.HomeownerChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.household.HouseholdChainStatusNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.income.IncomeChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.maritalstatus.MaritalStatusChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.mvh.MvhStatusChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.occupation.OccupationChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.residence.ResidenceChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.size.SizeChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.summarized.SummarizedChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.vehicles.VehiclesChainNNSales;
 
 
 
@@ -54,30 +62,30 @@ public class BatchOffline {
 //		list.add(new ChainNNSales());
 		
 		// linear + chain
-//		list.add(new AgeChainNNSales());
-//		list.add(new DwellingSizeChainNNSales());
-//		list.add(new DwellingTypeChainNNSales());
-//		list.add(new EducationChainNNSales());
-//		list.add(new GenderChainNNSales());
-//		list.add(new HomeownerChainNNSales());
-//		list.add(new HouseholdChainStatusNNSales());
-//		list.add(new IncomeChainNNSales());
-//		list.add(new MaritalStatusChainNNSales());
-//		list.add(new MvhStatusChainNNSales());
-//		list.add(new OccupationChainNNSales());
-//		list.add(new ResidenceChainNNSales());
-//		list.add(new SizeChainNNSales());
-//		list.add(new SummarizedChainNNSales());
-//		list.add(new VehiclesChainNNSales());
+		list.add(new AgeChainNNSales());
+		list.add(new DwellingSizeChainNNSales());
+		list.add(new DwellingTypeChainNNSales());
+		list.add(new EducationChainNNSales());
+		list.add(new GenderChainNNSales());
+		list.add(new HomeownerChainNNSales());
+		list.add(new HouseholdChainStatusNNSales());
+		list.add(new IncomeChainNNSales());
+		list.add(new MaritalStatusChainNNSales());
+		list.add(new MvhStatusChainNNSales());
+		list.add(new OccupationChainNNSales());
+		list.add(new ResidenceChainNNSales());
+		list.add(new SizeChainNNSales());
+		list.add(new SummarizedChainNNSales());
+		list.add(new VehiclesChainNNSales());
 		
 		// combinations
-		list.add(new MvhAndEduStatusChainNNSales());
-		list.add(new MvhStatusAndVehiclesChainNNSales());
-		list.add(new SummarizedAndEduChainNNSales());
-		list.add(new SummarizedAndMhvChainNNSales());
-		list.add(new VehiclesAndEducationChainNNSales());
-		list.add(new VehiclesAndSummarizedChainNNSales());
-		list.add(new MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales()); // all 4
+//		list.add(new MvhAndEduStatusChainNNSales());
+//		list.add(new MvhStatusAndVehiclesChainNNSales());
+//		list.add(new SummarizedAndEduChainNNSales());
+//		list.add(new SummarizedAndMhvChainNNSales());
+//		list.add(new VehiclesAndEducationChainNNSales());
+//		list.add(new VehiclesAndSummarizedChainNNSales());
+//		list.add(new MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales()); // all 4
 		
 		return list;
 	}
