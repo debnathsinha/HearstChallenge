@@ -203,7 +203,7 @@ h4. Vehicles Statistics
 | VehiclesChainNNSales[k=20] | 98.175% | 20.885|
 
 
-h3. Combinations
+h4. Combinations
 
 Model: MvhAndEduStatusChainNNSales
 
@@ -274,6 +274,276 @@ Model: MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales
 | MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=7] | 98.175% | 20.174|
 | MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=10] | 98.175% | 20.34|
 | MvhAndEduAndSummarizedAndVehiclesStatusChainNNSales[k=15] | 98.175% | 20.493|
+
+Model: BigComboChain1
+
+|_. Model |_. Coverage |_. RMSE |
+| BigComboChain1[k=1] | 98.175% | 23.974|
+| BigComboChain1[k=3] | 98.175% | 21.758|
+| BigComboChain1[k=5] | 98.175% | 21.203|
+| BigComboChain1[k=6] | 98.175% | 21.175|
+| BigComboChain1[k=7] | 98.175% | 20.952|
+| BigComboChain1[k=8] | 98.175% | 20.853|
+| BigComboChain1[k=9] | 98.175% | 20.731|
+| BigComboChain1[k=10] | 98.175% | 20.309|
+| BigComboChain1[k=15] | 98.175% | 20.391|
+| BigComboChain1[k=20] | 98.175% | 20.537|
+| BigComboChain1[k=30] | 98.175% | 20.704|
+
+Model: BigComboChain2 (edu, marital, summarized, vehicle)
+
+|_. Model |_. Coverage |_. RMSE |
+| BigComboChain2[k=5] | 98.175% | 20.335|
+| BigComboChain2[k=6] | 98.175% | 20.214|
+| BigComboChain2[k=7] | 98.175% | 20.205|
+| BigComboChain2[k=8] | 98.175% | 20.247|
+| BigComboChain2[k=9] | 98.175% | 20.29|
+| BigComboChain2[k=10] | 98.175% | 20.285|
+
+Model: BigComboChain3 (age, edu, marital)
+
+|_. Model |_. Coverage |_. RMSE |
+| BigComboChain3[k=1] | 98.32% | 24.866|
+| BigComboChain3[k=3] | 98.32% | 23.031|
+| BigComboChain3[k=5] | 98.32% | 21.057|
+| BigComboChain3[k=6] | 98.32% | 20.908|
+| BigComboChain3[k=7] | 98.32% | 20.648|
+| BigComboChain3[k=8] | 98.32% | 21.236|
+| BigComboChain3[k=9] | 98.32% | 21.088|
+| BigComboChain3[k=10] | 98.32% | 21.228|
+| BigComboChain3[k=13] | 98.32% | 22.063|
+| BigComboChain3[k=15] | 98.32% | 21.804|
+| BigComboChain3[k=17] | 98.32% | 21.574|
+| BigComboChain3[k=19] | 98.32% | 21.437|
+| BigComboChain3[k=20] | 98.32% | 21.374|
+| BigComboChain3[k=30] | 98.32% | 21.517|
+
+
+
+
+h3. Store Type
+
+|_. Model |_. Coverage |_. RMSE |
+| StoretypeNNSales[k=1] | 100% | 29.885|
+| StoretypeNNSales[k=3] | 100% | 24.465|
+| StoretypeNNSales[k=5] | 100% | 24.284|
+| StoretypeNNSales[k=10] | 100% | 24.026|
+| StoretypeNNSales[k=50] | 100% | 23.567|
+| StoretypeNNSales[k=100] | 100% | 23.523|
+| StoretypeNNSales[k=500] | 100% | 23.26|
+| StoretypeNNSales[k=1000] | 100% | 23.266|
+| StoretypeNNSales[k=999999] | 100% | 23.23|
+
+
+h4. Age Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| AgeStoretypeNNSales[k=1] | 99.77% | 26.648|
+| AgeStoretypeNNSales[k=3] | 99.77% | 23.01|
+| AgeStoretypeNNSales[k=5] | 99.77% | 24.121|
+| AgeStoretypeNNSales[k=6] | 99.77% | 23.736|
+| AgeStoretypeNNSales[k=7] | 99.77% | 23.5|
+| AgeStoretypeNNSales[k=8] | 99.77% | 23.367|
+| AgeStoretypeNNSales[k=9] | 99.77% | 23.271|
+| AgeStoretypeNNSales[k=10] | 99.77% | 23.286|
+| AgeStoretypeNNSales[k=15] | 99.77% | 23.23|
+| AgeStoretypeNNSales[k=20] | 99.77% | 23.186|
+
+h4. Dwelling Size Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| DwellingSizeStoretypeNNSales[k=1] | 99.77% | 27.66|
+| DwellingSizeStoretypeNNSales[k=3] | 99.77% | 23.333|
+| DwellingSizeStoretypeNNSales[k=5] | 99.77% | 24.006|
+| DwellingSizeStoretypeNNSales[k=6] | 99.77% | 23.729|
+| DwellingSizeStoretypeNNSales[k=7] | 99.77% | 23.694|
+| DwellingSizeStoretypeNNSales[k=8] | 99.77% | 23.641|
+| DwellingSizeStoretypeNNSales[k=9] | 99.77% | 23.839|
+| DwellingSizeStoretypeNNSales[k=10] | 99.77% | 23.702|
+| DwellingSizeStoretypeNNSales[k=15] | 99.77% | 23.732|
+| DwellingSizeStoretypeNNSales[k=20] | 99.77% | 23.201|
+
+h4. Dwelling Type Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| DwellingTypeStoretypeNNSales[k=1] | 99.77% | 28.355|
+| DwellingTypeStoretypeNNSales[k=3] | 99.77% | 23.733|
+| DwellingTypeStoretypeNNSales[k=5] | 99.77% | 23.809|
+| DwellingTypeStoretypeNNSales[k=6] | 99.77% | 24.608|
+| DwellingTypeStoretypeNNSales[k=7] | 99.77% | 24.269|
+| DwellingTypeStoretypeNNSales[k=8] | 99.77% | 24.165|
+| DwellingTypeStoretypeNNSales[k=9] | 99.77% | 24.148|
+| DwellingTypeStoretypeNNSales[k=10] | 99.77% | 23.987|
+| DwellingTypeStoretypeNNSales[k=15] | 99.77% | 23.817|
+| DwellingTypeStoretypeNNSales[k=20] | 99.77% | 23.605|
+
+h4. Education Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| EducationStoretypeNNSales[k=1] | 99.77% | 26.684|
+| EducationStoretypeNNSales[k=3] | 99.77% | 22.947|
+| EducationStoretypeNNSales[k=5] | 99.77% | 22.848|
+| EducationStoretypeNNSales[k=6] | 99.77% | 23.022|
+| EducationStoretypeNNSales[k=7] | 99.77% | 22.813|
+| EducationStoretypeNNSales[k=8] | 99.77% | 23.026|
+| EducationStoretypeNNSales[k=9] | 99.77% | 23.459|
+| EducationStoretypeNNSales[k=10] | 99.77% | 23.231|
+| EducationStoretypeNNSales[k=15] | 99.77% | 22.583|
+| EducationStoretypeNNSales[k=20] | 99.77% | 22.831|
+
+h4. Gender Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| GenderStoretypeNNSales[k=1] | 99.77% | 27.496|
+| GenderStoretypeNNSales[k=3] | 99.77% | 24.104|
+| GenderStoretypeNNSales[k=5] | 99.77% | 24.183|
+| GenderStoretypeNNSales[k=6] | 99.77% | 23.89|
+| GenderStoretypeNNSales[k=7] | 99.77% | 23.617|
+| GenderStoretypeNNSales[k=8] | 99.77% | 23.843|
+| GenderStoretypeNNSales[k=9] | 99.77% | 24.16|
+| GenderStoretypeNNSales[k=10] | 99.77% | 24.07|
+| GenderStoretypeNNSales[k=15] | 99.77% | 23.675|
+| GenderStoretypeNNSales[k=20] | 99.77% | 23.44|
+
+h4. Homeowner Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| HomeownerStoretypeNNSales[k=1] | 99.77% | 27.194|
+| HomeownerStoretypeNNSales[k=3] | 99.77% | 23.288|
+| HomeownerStoretypeNNSales[k=5] | 99.77% | 23.239|
+| HomeownerStoretypeNNSales[k=6] | 99.77% | 23.723|
+| HomeownerStoretypeNNSales[k=7] | 99.77% | 23.65|
+| HomeownerStoretypeNNSales[k=8] | 99.77% | 23.527|
+| HomeownerStoretypeNNSales[k=9] | 99.77% | 23.378|
+| HomeownerStoretypeNNSales[k=10] | 99.77% | 23.632|
+| HomeownerStoretypeNNSales[k=15] | 99.77% | 23.604|
+| HomeownerStoretypeNNSales[k=20] | 99.77% | 23.354|
+
+h4. Household Status Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| HouseholdStoretypeStatusNNSales[k=1] | 99.77% | 26.892|
+| HouseholdStoretypeStatusNNSales[k=3] | 99.77% | 23.996|
+| HouseholdStoretypeStatusNNSales[k=5] | 99.77% | 24.239|
+| HouseholdStoretypeStatusNNSales[k=6] | 99.77% | 23.923|
+| HouseholdStoretypeStatusNNSales[k=7] | 99.77% | 23.658|
+| HouseholdStoretypeStatusNNSales[k=8] | 99.77% | 23.46|
+| HouseholdStoretypeStatusNNSales[k=9] | 99.77% | 23.366|
+| HouseholdStoretypeStatusNNSales[k=10] | 99.77% | 23.359|
+| HouseholdStoretypeStatusNNSales[k=15] | 99.77% | 23.249|
+| HouseholdStoretypeStatusNNSales[k=20] | 99.77% | 23.211|
+
+h4. Income Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| IncomeStoretypeNNSales[k=1] | 99.77% | 26.325|
+| IncomeStoretypeNNSales[k=3] | 99.77% | 23.728|
+| IncomeStoretypeNNSales[k=5] | 99.77% | 23.785|
+| IncomeStoretypeNNSales[k=6] | 99.77% | 23.585|
+| IncomeStoretypeNNSales[k=7] | 99.77% | 23.357|
+| IncomeStoretypeNNSales[k=8] | 99.77% | 23.249|
+| IncomeStoretypeNNSales[k=9] | 99.77% | 23.051|
+| IncomeStoretypeNNSales[k=10] | 99.77% | 23.054|
+| IncomeStoretypeNNSales[k=15] | 99.77% | 23.415|
+| IncomeStoretypeNNSales[k=20] | 99.77% | 23.273|
+
+h4. Marital Status Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| MaritalStatusStoretypeNNSales[k=1] | 99.77% | 27.569|
+| MaritalStatusStoretypeNNSales[k=3] | 99.77% | 25.462|
+| MaritalStatusStoretypeNNSales[k=5] | 99.77% | 24.263|
+| MaritalStatusStoretypeNNSales[k=6] | 99.77% | 23.879|
+| MaritalStatusStoretypeNNSales[k=7] | 99.77% | 23.627|
+| MaritalStatusStoretypeNNSales[k=8] | 99.77% | 23.494|
+| MaritalStatusStoretypeNNSales[k=9] | 99.77% | 23.842|
+| MaritalStatusStoretypeNNSales[k=10] | 99.77% | 23.706|
+| MaritalStatusStoretypeNNSales[k=15] | 99.77% | 23.652|
+| MaritalStatusStoretypeNNSales[k=20] | 99.77% | 23.58|
+
+h4. Mvh Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| MvhStatusStoretypeNNSales[k=1] | 99.77% | 26.953|
+| MvhStatusStoretypeNNSales[k=3] | 99.77% | 23.104|
+| MvhStatusStoretypeNNSales[k=5] | 99.77% | 22.966|
+| MvhStatusStoretypeNNSales[k=6] | 99.77% | 23.042|
+| MvhStatusStoretypeNNSales[k=7] | 99.77% | 22.941|
+| MvhStatusStoretypeNNSales[k=8] | 99.77% | 22.955|
+| MvhStatusStoretypeNNSales[k=9] | 99.77% | 22.946|
+| MvhStatusStoretypeNNSales[k=10] | 99.77% | 22.984|
+| MvhStatusStoretypeNNSales[k=15] | 99.77% | 23.113|
+| MvhStatusStoretypeNNSales[k=20] | 99.77% | 23.01|
+
+h4. Occupation Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| OccupationStoretypeNNSales[k=1] | 99.77% | 26.968|
+| OccupationStoretypeNNSales[k=3] | 99.77% | 23.321|
+| OccupationStoretypeNNSales[k=5] | 99.77% | 23.078|
+| OccupationStoretypeNNSales[k=6] | 99.77% | 23.173|
+| OccupationStoretypeNNSales[k=7] | 99.77% | 22.974|
+| OccupationStoretypeNNSales[k=8] | 99.77% | 23.035|
+| OccupationStoretypeNNSales[k=9] | 99.77% | 23.052|
+| OccupationStoretypeNNSales[k=10] | 99.77% | 22.568|
+| OccupationStoretypeNNSales[k=15] | 99.77% | 22.883|
+| OccupationStoretypeNNSales[k=20] | 99.77% | 23.024|
+
+h4. Residence Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| ResidenceStoretypeNNSales[k=1] | 99.77% | 27.48|
+| ResidenceStoretypeNNSales[k=3] | 99.77% | 23.593|
+| ResidenceStoretypeNNSales[k=5] | 99.77% | 23.766|
+| ResidenceStoretypeNNSales[k=6] | 99.77% | 23.61|
+| ResidenceStoretypeNNSales[k=7] | 99.77% | 23.897|
+| ResidenceStoretypeNNSales[k=8] | 99.77% | 23.874|
+| ResidenceStoretypeNNSales[k=9] | 99.77% | 23.746|
+| ResidenceStoretypeNNSales[k=10] | 99.77% | 24.273|
+| ResidenceStoretypeNNSales[k=15] | 99.77% | 23.621|
+| ResidenceStoretypeNNSales[k=20] | 99.77% | 23.549|
+
+h4. Size Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| SizeStoretypeNNSales[k=1] | 99.77% | 27.683|
+| SizeStoretypeNNSales[k=3] | 99.77% | 23.473|
+| SizeStoretypeNNSales[k=5] | 99.77% | 23.734|
+| SizeStoretypeNNSales[k=6] | 99.77% | 23.624|
+| SizeStoretypeNNSales[k=7] | 99.77% | 23.581|
+| SizeStoretypeNNSales[k=8] | 99.77% | 23.511|
+| SizeStoretypeNNSales[k=9] | 99.77% | 23.863|
+| SizeStoretypeNNSales[k=10] | 99.77% | 23.575|
+| SizeStoretypeNNSales[k=15] | 99.77% | 23.528|
+| SizeStoretypeNNSales[k=20] | 99.77% | 23.518|
+
+h4. Summarized Area Level Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| SummarizedStoretypeNNSales[k=1] | 99.955% | 27.436|
+| SummarizedStoretypeNNSales[k=3] | 99.955% | 23.565|
+| SummarizedStoretypeNNSales[k=5] | 99.955% | 22.554|
+| SummarizedStoretypeNNSales[k=6] | 99.955% | 22.445|
+| SummarizedStoretypeNNSales[k=7] | 99.955% | 22.282|
+| SummarizedStoretypeNNSales[k=8] | 99.955% | 22.135|
+| SummarizedStoretypeNNSales[k=9] | 99.955% | 22.104|
+| SummarizedStoretypeNNSales[k=10] | 99.955% | 22.078|
+| SummarizedStoretypeNNSales[k=15] | 99.955% | 22.067|
+| SummarizedStoretypeNNSales[k=20] | 99.955% | 22.005|
+
+h4. Vehicles Statistics
+
+|_. Model |_. Coverage |_. RMSE |
+| VehiclesStoretypeNNSales[k=1] | 99.615% | 26.912|
+| VehiclesStoretypeNNSales[k=3] | 99.615% | 22.956|
+| VehiclesStoretypeNNSales[k=5] | 99.615% | 22.812|
+| VehiclesStoretypeNNSales[k=6] | 99.615% | 22.464|
+| VehiclesStoretypeNNSales[k=7] | 99.615% | 22.448|
+| VehiclesStoretypeNNSales[k=8] | 99.615% | 22.334|
+| VehiclesStoretypeNNSales[k=9] | 99.615% | 22.306|
+| VehiclesStoretypeNNSales[k=10] | 99.615% | 22.328|
+| VehiclesStoretypeNNSales[k=15] | 99.615% | 22.665|
+| VehiclesStoretypeNNSales[k=20] | 99.615% | 22.688|
 
 
 

@@ -1,7 +1,7 @@
 package com.cleveralgorithms.hearst.nn;
 
 import com.cleveralgorithms.hearst.nn.ImpTestNearestNeighbourSales.OfflineConfiguration;
-import com.cleveralgorithms.hearst.nn.experiments.combinations.VehiclesAndSummarizedChainNNSales;
+import com.cleveralgorithms.hearst.nn.experiments.combinations.chain.VehiclesAndSummarizedChainNNSales;
 
 
 public class GenerateSubmissionNNData {

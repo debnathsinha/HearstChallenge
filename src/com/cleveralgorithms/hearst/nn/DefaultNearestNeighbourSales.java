@@ -46,7 +46,7 @@ public abstract class DefaultNearestNeighbourSales extends NearestNeighbourSales
 			}
 		}
 		
-		return "select store_key,"+selectFields+" from store_mo where "+whereConditions.toString();
+		return "select store_key,"+selectFields+" from store_mo2 where "+whereConditions.toString(); // includes store type id 
 	}
 
 	

@@ -17,7 +17,7 @@ import com.cleveralgorithms.hearst.Utils;
 
 public abstract class NearestNeighbourSales 
 {
-	public final static int NUM_THREADS = 2;
+	public final static int NUM_THREADS = 4;
 	
 	public final static boolean SHOW_SKIPPED = false;
 	

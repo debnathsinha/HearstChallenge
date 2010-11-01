@@ -193,7 +193,7 @@ public abstract class ImpTestNearestNeighbourSales extends DefaultNearestNeighbo
 			whereConditions.append(")");			
 		}
 		
-		String table = (testMode) ? "store_mo" : "store_vd" ;
+		String table = (testMode) ? "store_mo2" : "store_vd2"; // '2' includes store type id 
 				
 		return "select store_key,"+selectFields+" from "+table+" where "+whereConditions;
 	}

@@ -1,4 +1,4 @@
-package com.cleveralgorithms.hearst.nn.experiments.combinations;
+package com.cleveralgorithms.hearst.nn.experiments.combinations.chain;
 
 import com.cleveralgorithms.hearst.nn.experiments.chain.ChainBoundedAncestor;
 
