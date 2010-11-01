@@ -48,7 +48,7 @@ public class StoreTypeTitleYearMonthModel implements SalesModel
 		Connection conn = null;
 		ResultSet rs = null;
 		try {
-			String query = "select * from template_storetype_vd";
+			String query = "select * from template_storetype_vd2"; // no neg sales
 			
 			conn = DbIO.getConnection();
 			rs = DbIO.executeReadOnlyQuery(conn, query);

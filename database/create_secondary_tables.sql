@@ -496,3 +496,124 @@ where smo.issue_key = imo.issue_key
 and smo.sales >= 0
 group by smo.store_key, smo.title_key, imo.on_year, imo.on_month;
 
+-- chain_title_year_month_sales_mo2
+
+drop table IF EXISTS chain_title_year_month_sales_mo2;
+
+create table chain_title_year_month_sales_mo2 (
+	chain_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX chain_title_year_month_sales_mo2_index1 USING BTREE ON chain_title_year_month_sales_mo2 (chain_key, title_key, on_year, on_month);
+
+insert into chain_title_year_month_sales_mo2(chain_key, title_key, on_year, on_month, sales_total)
+select chain_key, title_key, on_year, on_month, avg(sales_total)
+from template_mo2 t inner join store_chain_mo using (store_key)
+where sales_total >= 0
+group by chain_key, title_key, on_year, on_month;
+
+-- chain_title_year_month_sales_td2
+
+drop table IF EXISTS chain_title_year_month_sales_td2;
+
+create table chain_title_year_month_sales_td2 (
+	chain_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX chain_title_year_month_sales_td2_index1 USING BTREE ON chain_title_year_month_sales_td2 (chain_key, title_key, on_year, on_month);
+
+insert into chain_title_year_month_sales_td2(chain_key, title_key, on_year, on_month, sales_total)
+select distinct c.chain_key, t.title_key, t.on_year, t.on_month, mo.sales_total
+from template_vd2 t, store_chain_vd c, chain_title_year_month_sales_mo2 mo
+where c.store_key = t.store_key
+and mo.title_key = t.title_key 
+and mo.on_year = t.on_year
+and mo.on_month = t.on_month
+and mo.chain_key = c.chain_key;
+
+
+-- template_storetype_mo2
+drop table if exists template_storetype_mo2;
+
+create table template_storetype_mo2 (
+	store_type varchar(255) not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+create index template_storetype_mo2_index1 on template_storetype_mo2 (title_key, on_year, on_month);
+
+insert into template_storetype_mo2(store_type, title_key, on_year, on_month, sales_total)
+select distinct or_cot_desc as store_type, title_key, on_year, on_month, avg(sales_total) as sales_total 
+from template_mo2, store_mo 
+where template_mo2.store_key=store_mo.store_key 
+group by store_type, title_key, on_year, on_month;
+
+
+-- template_storetype_vd2
+
+drop table IF EXISTS template_storetype_vd2;
+
+create table template_storetype_vd2 (
+	title_key int not null, 
+	on_year int not null,
+	on_month int not null,
+	store_type varchar(255) not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX template_storetype_vd2_index1 ON template_storetype_vd2 (title_key, on_year, on_month, store_type, sales_total);
+
+insert into template_storetype_vd2 (title_key, on_year, on_month, store_type, sales_total)
+select distinct t.title_key, t.on_year, t.on_month, t.store_type, c.sales_total
+from template_vd3 t, template_storetype_mo2 c
+where t.title_key=c.title_key and t.on_year=c.on_year and t.on_month=c.on_month and t.store_type=c.store_type;
+
+-- template_mo_wholesaler
+drop table IF EXISTS template_mo_wholesaler2;
+
+create table template_mo_wholesaler2 (
+	wholesaler_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX template_mo_wholesaler2_index1 ON template_mo_wholesaler2 (wholesaler_key, title_key, on_year, on_month);
+
+insert into template_mo_wholesaler2(wholesaler_key, title_key, on_year, on_month, sales_total)
+select w.wholesaler_key, title_key, on_year, on_month, avg(sales_total)
+from template_mo2 INNER JOIN wholesaler_store_mo w
+using (title_key, store_key)
+group by wholesaler_key, title_key, on_year, on_month;
+
+-- wholesaler_title_year_month_sales_vd
+drop table IF EXISTS wholesaler_title_year_month_sales_vd2;
+
+create table wholesaler_title_year_month_sales_vd2 (
+	wholesaler_key int not null,
+	title_key int not null,
+	on_year int not null,
+	on_month int not null,
+	sales_total decimal(18,9) not null default 0
+);
+
+CREATE INDEX wholesaler_title_year_month_sales_vd2_index1 ON wholesaler_title_year_month_sales_vd2 (wholesaler_key, title_key, on_year, on_month);
+
+insert into wholesaler_title_year_month_sales_vd2(wholesaler_key, title_key, on_year, on_month, sales_total)
+select t.wholesaler_key, t.title_key, t.on_year, t.on_month, m.sales_total
+from template_vd2_wholesaler t
+INNER JOIN template_mo_wholesaler2 m
+using (wholesaler_key, title_key, on_year, on_month);
+

@@ -48,7 +48,7 @@ public class ChainTitleYearMonthModel implements SalesModel
 		Connection conn = null;
 		ResultSet rs = null;		
 		try {
-			String query = "select * from chain_title_year_month_sales_td";
+			String query = "select * from chain_title_year_month_sales_td2"; // no neg sales
 			
 			conn = DbIO.getConnection();
 			rs = DbIO.executeReadOnlyQuery(conn, query);

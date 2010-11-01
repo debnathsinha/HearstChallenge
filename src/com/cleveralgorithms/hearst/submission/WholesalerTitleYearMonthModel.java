@@ -48,7 +48,7 @@ public class WholesalerTitleYearMonthModel implements SalesModel
 		Connection conn = null;
 		ResultSet rs = null;		
 		try {
-			String query = "select * from wholesaler_title_year_month_sales_vd";
+			String query = "select * from wholesaler_title_year_month_sales_vd2";
 			
 			conn = DbIO.getConnection();
 			rs = DbIO.executeReadOnlyQuery(conn, query);
