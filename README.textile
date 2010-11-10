@@ -14,7 +14,7 @@ Good luck
 
 h2. Leaderboard Strategies
 
-The following summarizes the simple strategies I tried for the leaderboard. At the time of writing I was sitting on the top of the leaderboard. Strategies are listed in order of increasing value/performance, and if a given strategy does not find a value for a record in the validation dataset, the next strategy .
+The following summarizes the simple strategies I tried for the leaderboard. At the time of writing I was sitting on the top of the leaderboard. Strategies are listed in order of increasing value/performance, and are cascaded to fill in any holes.
 
 # Average sales for title/year/month
 # Average sales for wholesaler/title/year/month
