@@ -4,7 +4,7 @@ This project documents the participation of Jason Brownlee in the "Hearst Analyt
 
 h2. Overview
 
-I originally was interested in participating in the Hearst Challenge. After writing some code and making some submissions I learned that the final submission problem is quite different to that of the verification problem. This coupled with my limited time (I'm trying to finish my "clever algorithms":http://www.cleveralgorithms.com book project), I have decided to stop participating in the competition and release all my code.
+I originally was interested in participating in the Hearst Challenge. After writing some code and making some submissions I learned that the final submission problem is quite different to that of the verification problem. This coupled with my limited time (I'm trying to finish my "clever algorithms":https://github.com/jbrownlee/CleverAlgorithms book project), I have decided to stop participating in the competition and release all my code.
 
 I expect that that sql and Java code in this project would provide a useful jumpstart to anyone looking to participate in the 2010 hearst challenge.
 
@@ -33,7 +33,7 @@ This section summarizes the code.
 * data - all the unzipped data files (download them yourself)
 * analysis - early analysis ruby script (ignore it)
 * dat - create this - holding location for data files created in a two-step submission process
-* experiments - ruby scripts for preparing submission files with some of the simple strategies - slow and all written in java now so ignore them (unless your a ruby person).
+* experiments - ruby scripts for preparing submission files with some of the simple strategies - slow and all written in java now so ignore them (unless you're a ruby person).
 * lib - some java libs needed for talking to the db and other
 * submissions - create this, where submission files are put
 * src - all the java code
